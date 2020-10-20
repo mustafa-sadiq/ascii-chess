@@ -14,8 +14,9 @@ public class ChessGame {
 		board.printBoard();
 	}
 
-	public void play() {
-		Scanner input = new Scanner(System.in);
+	public void play() throws Exception {
+		Scanner scanner = new Scanner(System.in);
+		String x = "abcdefgh";
 		
 		while (!gameFinished) {
 			if (whiteTurn) {
@@ -24,20 +25,30 @@ public class ChessGame {
 				System.out.print("Black's move: ");
 			}
 			
-			String moveFrom = input.next();
-			System.out.println(moveFrom);
+			String input = scanner.nextLine();
+			System.out.println(input + "\n");
+			int fromX = x.indexOf(input.charAt(0));
+			int fromY = input.charAt(1)-48;
 			
-			String moveTo = input.next();
-			System.out.println(moveTo);
+			int toX = x.indexOf(input.charAt(3));
+			int toY = input.charAt(4)-48;
+			
+			Spot spotFrom = board.getBox(fromX, fromY);
+			Spot spotTo = board.getBox(toX, toY);
+			
+			move(spotFrom, spotTo);
 			
 			
-			gameFinished = true;
 		}
 		
-		input.close();
+		scanner.close();
 	}
 	
-	public void move() {
+	public void move(Spot from, Spot to) {
+		gameFinished = true;
+	}
+	
+	public void getSpotFrom(String value) {
 		
 	}
 

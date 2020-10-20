@@ -2,7 +2,7 @@ package chess;
 
 public class Chess {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		System.out.println("Welcome to Chess32!");
 		
