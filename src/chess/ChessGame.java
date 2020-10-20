@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Scanner;
+
 public class ChessGame {
 	Board board;
 	boolean whiteTurn;
@@ -13,12 +15,30 @@ public class ChessGame {
 	}
 
 	public void play() {
+		Scanner input = new Scanner(System.in);
+		
 		while (!gameFinished) {
 			if (whiteTurn) {
-				System.out.println("White's move: ");
+				System.out.print("White's move: ");
+			} else {
+				System.out.print("Black's move: ");
 			}
+			
+			String moveFrom = input.next();
+			System.out.println(moveFrom);
+			
+			String moveTo = input.next();
+			System.out.println(moveTo);
+			
+			
 			gameFinished = true;
 		}
+		
+		input.close();
+	}
+	
+	public void move() {
+		
 	}
 
 }
