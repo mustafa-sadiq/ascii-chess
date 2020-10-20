@@ -1,16 +1,15 @@
 package chess;
 
 public class ChessGame {
-
+	Board board;
 	boolean whiteTurn;
 	boolean gameFinished;
 
 	public ChessGame() {
 		whiteTurn = true;
 		gameFinished = false;
-		Board board = new Board();
+		board = new Board();
 		board.printBoard();
-		play();
 	}
 
 	public void play() {
