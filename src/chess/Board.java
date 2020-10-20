@@ -8,12 +8,7 @@ public class Board {
 		resetBoard();
 	}
 
-	public Spot getBox(int x, int y) throws Exception {
-
-		if (x < 0 || x > 7 || y < 0 || y > 7) {
-			throw new Exception("Index out of bound");
-		}
-
+	public Spot getBox(int x, int y) {
 		return boxes[x][y];
 	}
 
