@@ -70,7 +70,7 @@ public class Board {
 						hashtags = !hashtags;
 					}					
 					else {
-						if (!hashtags && boxes[i][j].getPiece() == null) {
+						if (!hashtags) {
 							System.out.print("##" + " ");
 						} else {
 							System.out.print("  " + " ");

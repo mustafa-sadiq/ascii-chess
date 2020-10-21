@@ -67,7 +67,7 @@ public class ChessGame {
 			from.setPiece(null);						
 			board.printBoard();
 		} else {
-			System.out.println("Invalid move! Try again!");
+			System.out.println("Illegal move, try again");
 		}
 	}
 
