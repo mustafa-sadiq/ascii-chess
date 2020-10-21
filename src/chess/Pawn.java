@@ -13,8 +13,7 @@ public class Pawn extends Piece {
 		int deltaY;
 		
 		if (start.getPiece().isWhite()) deltaY = -(start.getY()-end.getY());
-		else deltaY = end.getY()-start.getY();
-		
+		else deltaY = end.getY()-start.getY();		
 
 		
 		if (start.getY() == 1 || start.getY() == 6 && deltaY == 0 && end.getPiece() == null) {

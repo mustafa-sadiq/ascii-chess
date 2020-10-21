@@ -9,9 +9,9 @@ public class Knight extends Piece {
 
 	@Override
 	public boolean canMove(Board board, Spot start, Spot end) {
-		int x = Math.abs(start.getX() - end.getX());
-		int y = Math.abs(start.getY() - end.getY());
-		return x * y == 2;
+		int deltaX = Math.abs(start.getX() - end.getX());
+		int deltaY = Math.abs(start.getY() - end.getY());
+		return deltaX * deltaY == 2;
 	}
 
 	@Override
