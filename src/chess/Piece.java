@@ -1,11 +1,15 @@
 package chess;
 
 public abstract class Piece {
-	private boolean killed = false;
-	private boolean white = false;
+	private boolean killed;
+	private boolean white;
+	private boolean hasMoved;
 
 	public Piece(boolean white) {
-		this.setWhite(white);
+		this.killed = false;
+		this.white = white;
+		this.hasMoved = false;
+		
 	}
 
 	public boolean isWhite() {
@@ -22,6 +26,14 @@ public abstract class Piece {
 
 	public void setKilled(boolean killed) {
 		this.killed = killed;
+	}
+	
+	public boolean hasMoved() {
+		return this.hasMoved;
+	}
+	
+	public void setHasMoved(boolean hasMoved) {
+		this.hasMoved = hasMoved;
 	}
 
 	public abstract boolean canMove(Board board, Spot start, Spot end);

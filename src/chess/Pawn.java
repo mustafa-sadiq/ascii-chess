@@ -20,7 +20,7 @@ public class Pawn extends Piece {
 		} else if (deltaX == 1 && deltaY == 1 && end.getPiece() != null) {
 			return true;
 		} else {
-			return false;
+			return true;
 		}
 		
 		

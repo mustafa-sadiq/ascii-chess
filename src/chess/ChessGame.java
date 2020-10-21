@@ -28,20 +28,30 @@ public class ChessGame {
 			}
 
 			String input = scanner.nextLine();
-			int fromX = x.indexOf(input.charAt(0));
-			int fromY = input.charAt(1) - '0' - 1;
 
-			int toX = x.indexOf(input.charAt(3));
-			int toY = input.charAt(4) - '0' - 1;
+			if (input.equals("draw")) {
+				gameFinished = true;
+			} else {
 
-			Spot spotFrom = board.getBox(fromY, fromX);
-			Spot spotTo = board.getBox(toY, toX);
+				int fromX = x.indexOf(input.charAt(0));
+				int fromY = input.charAt(1) - '0' - 1;
 
-			System.out.println("Trying moving from: " + spotFrom.toString());
-			System.out.println("Trying moving to: " + spotTo.toString());
+				int toX = x.indexOf(input.charAt(3));
+				int toY = input.charAt(4) - '0' - 1;
 
-			move(spotFrom, spotTo);
+				Spot spotFrom = board.getBox(fromY, fromX);
+				Spot spotTo = board.getBox(toY, toX);
 
+				System.out.println("Trying moving from: " + spotFrom.toString());
+				System.out.println("Trying moving to: " + spotTo.toString());
+
+				move(spotFrom, spotTo);
+			}
+
+		}
+
+		if (whiteTurn && gameFinished) {
+			System.out.println("Black wins");
 		}
 
 		scanner.close();
@@ -52,8 +62,7 @@ public class ChessGame {
 			System.out.println("No piece to move! Try again");
 		} else if (to.getPiece() != null && from.getPiece().isWhite() == from.getPiece().isWhite()) {
 			System.out.println("Can't move to own piece! Try again");
-		}
-		else if (to.getPiece() != null) {
+		} else if (to.getPiece() != null) {
 			movedAndKill(from, to);
 		} else {
 			moveToEmpty(from, to);
@@ -64,7 +73,7 @@ public class ChessGame {
 		System.out.println("Tring to move");
 		if (from.getPiece().canMove(board, from, to)) {
 			to.setPiece(from.getPiece());
-			from.setPiece(null);						
+			from.setPiece(null);
 			board.printBoard();
 		} else {
 			System.out.println("Illegal move, try again");
