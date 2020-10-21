@@ -60,21 +60,22 @@ public class Board {
 	}
 
 	public void printBoard() {
-		boolean hashtags = false;
+		boolean hashtags = true;
 		System.out.println("");
 		for (int i = 7; i >= 0; i--) {
 			for (int j = 0; j <= 8; j++) {
 				if (j != 8) {
 					if (boxes[i][j].getPiece() != null) {
 						System.out.print(boxes[i][j] + " ");
-					} else {
-						if (!hashtags) {
-							System.out.print(boxes[i][j] + " ");
-							hashtags = true;
+						hashtags = !hashtags;
+					}					
+					else {
+						if (!hashtags && boxes[i][j].getPiece() == null) {
+							System.out.print("##" + " ");
 						} else {
 							System.out.print("  " + " ");
-							hashtags = false;
 						}
+						hashtags = !hashtags;
 					}
 				} else {
 					hashtags = !hashtags;

@@ -37,7 +37,7 @@ public class Spot {
 
 	public String toString() {
 		if (piece == null) {
-			return "##";
+			return "null";
 		} else {
 			return piece.toString();
 		}

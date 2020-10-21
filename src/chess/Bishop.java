@@ -10,7 +10,10 @@ public class Bishop extends Piece {
 	@Override
 	public boolean canMove(Board board, Spot start, Spot end) {
 		// TODO Auto-generated method stub
-		return false;
+		int deltaY = Math.abs(start.getX()-end.getX());
+		int deltaX = Math.abs(start.getY()-end.getY());
+		
+		return deltaY == deltaX;
 	}
 	
 	
