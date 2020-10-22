@@ -2,13 +2,13 @@ package chess;
 
 public class Spot {
 	private Piece piece;
-	private int x;
-	private int y;
+	private int row;
+	private int col;
 
-	public Spot(int x, int y, Piece piece) {
-		this.setPiece(piece);
-		this.setX(x);
-		this.setY(y);
+	public Spot(int row, int col, Piece piece) {
+		this.piece = piece;
+		this.row = row;
+		this.col = col;
 	}
 
 	public Piece getPiece() {
@@ -19,20 +19,12 @@ public class Spot {
 		this.piece = p;
 	}
 
-	public int getX() {
-		return this.x;
+	public int getRow() {
+		return this.row;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return this.y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
+	public int getCol() {
+		return this.col;
 	}
 
 	public String toString() {

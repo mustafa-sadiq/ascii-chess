@@ -8,16 +8,16 @@ public class Pawn extends Piece {
 	}
 
 	@Override
-	public boolean canMove(Board board, Spot start, Spot end) {
-		int deltaX = Math.abs(start.getX()-end.getX());
-		int deltaY = Math.abs(start.getY()-end.getY());
+	public boolean canMove(Board board, Spot from, Spot to) {
+		int deltaRow = Math.abs(from.getRow()-to.getRow());
+		int deltaCol = Math.abs(from.getCol()-to.getCol());
 
 		
-		if (start.getY() == 1 || start.getY() == 6 && deltaX == 0 && end.getPiece() == null) {
+		if (from.getRow() == 1 || from.getRow() == 6 && deltaCol == 0 && to.getPiece() == null) {
 			return true;
-		} else if (deltaY == 1 && deltaX == 0 && end.getPiece() == null) {
+		} else if (deltaCol == 1 && deltaRow == 0 && to.getPiece() == null) {
 			return true;
-		} else if (deltaX == 1 && deltaY == 1 && end.getPiece() != null) {
+		} else if (deltaCol == 1 && deltaRow == 1 && to.getPiece() != null) {
 			return true;
 		} else {
 			return true;

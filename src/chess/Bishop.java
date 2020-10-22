@@ -8,43 +8,39 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	public boolean canMove(Board board, Spot start, Spot end) {
+	public boolean canMove(Board board, Spot from, Spot to) {
 		// TODO Auto-generated method stub
-		int deltaX = Math.abs(start.getX() - end.getX());
-		int deltaY = Math.abs(start.getY() - end.getY());
-
-		if (start.getY() == end.getY() || start.getX() == end.getX()) {
+		if (from.getRow() == to.getRow() || from.getCol() == to.getCol()) {
 			return false;
-		} else if (deltaY != deltaX) {
+		} else if (Math.abs(from.getRow() - to.getRow()) != Math.abs(from.getCol() - to.getCol())) {
 			return false;
-		}
-
+		} 
+		
 		int rowOffset, colOffset;
-
-		if (start.getY() < end.getY()) {
+		
+		if(from.getRow() < to.getRow()){
 			rowOffset = 1;
-		} else {
+		}else{
 			rowOffset = -1;
 		}
-
-		if (start.getX() < end.getX()) {
+		
+		if(from.getCol() < to.getCol()){
 			colOffset = 1;
-		} else {
+		}else{
 			colOffset = -1;
 		}
-
-		int y = start.getX() + colOffset;
-		for (int x = start.getY() + rowOffset; x != end.getY(); x += rowOffset) {
-
-			if (board.getBox(x, y).getPiece() != null) {
+		
+		int col = from.getCol() + colOffset;
+		for(int row = from.getRow() + rowOffset; row != to.getRow(); row += rowOffset){
+			
+			if(board.getBox(row, col).getPiece() != null){
+				System.out.println("Can not jump over piece.");
 				return false;
 			}
-
-			y += colOffset;
+			
+			col += colOffset;
 		}
-
-		return true;
-
+			return true;
 	}
 
 	@Override

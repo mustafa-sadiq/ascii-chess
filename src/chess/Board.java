@@ -61,7 +61,7 @@ public class Board {
 
 	public void printBoard() {
 		boolean hashtags = true;
-		System.out.println("");
+		
 		for (int i = 7; i >= 0; i--) {
 			for (int j = 0; j <= 8; j++) {
 				if (j != 8) {
@@ -85,7 +85,6 @@ public class Board {
 			System.out.println();
 		}
 		System.out.println(" a  b  c  d  e  f  g  h");
-		System.out.println("");
 	}
 	
 	public Spot getKingSpot(boolean isWhite) {

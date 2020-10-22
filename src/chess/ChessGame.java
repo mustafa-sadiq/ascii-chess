@@ -10,14 +10,14 @@ public class ChessGame {
 	public ChessGame() {
 		whiteTurn = true;
 		gameFinished = false;
-		board = new Board();
-		board.printBoard();
+		board = new Board();			
 	}
 
 	public void play() {
 		Scanner scanner = new Scanner(System.in);
 		String x = "abcdefgh";
-
+		board.printBoard();
+		System.out.println();
 		while (!gameFinished) {
 			if (whiteTurn) {
 				System.out.print("White's move: ");
@@ -31,14 +31,14 @@ public class ChessGame {
 				gameFinished = true;
 			} else {
 
-				int fromX = x.indexOf(input.charAt(0));
-				int fromY = input.charAt(1) - '0' - 1;
+				int fromCol = x.indexOf(input.charAt(0));
+				int fromRow = input.charAt(1) - '0' - 1;
 
-				int toX = x.indexOf(input.charAt(3));
-				int toY = input.charAt(4) - '0' - 1;
+				int toCol = x.indexOf(input.charAt(3));
+				int toRow = input.charAt(4) - '0' - 1;
 
-				Spot spotFrom = board.getBox(fromY, fromX);
-				Spot spotTo = board.getBox(toY, toX);
+				Spot spotFrom = board.getBox(fromRow, fromCol);
+				Spot spotTo = board.getBox(toRow, toCol);
 
 				System.out.println("Trying moving from: " + spotFrom.toString());
 				System.out.println("Trying moving to: " + spotTo.toString());
@@ -73,20 +73,24 @@ public class ChessGame {
 	}
 
 	public void moveToEmpty(Spot from, Spot to) {
-		//System.out.println("Tring to move");
+		System.out.println("Trying to move");
 		if (from.getPiece().canMove(board, from, to)) {
 			to.setPiece(from.getPiece());
 			from.setPiece(null);
+			System.out.println();
 			board.printBoard();
+			System.out.println();
+			//this.whiteTurn = !this.whiteTurn;
+			
 		} else {
 			System.out.println("Illegal move, try again");
 		}
 		
-		this.whiteTurn = !this.whiteTurn;
+		
 	}
 
 	public void movedAndKill(Spot from, Spot to) {
-		//System.out.println("Tring to move and kill");
+		System.out.println("Trying to move and kill");
 		this.whiteTurn = !this.whiteTurn;
 	}
 
