@@ -10,16 +10,27 @@ public class Rook extends Piece {
 	@Override
 	public boolean canMove(Board board, Spot from, Spot to) {
 		// TODO Auto-generated method stub
-		if (from.getRow() != to.getRow() || from.getCol() != to.getCol()) {
+		if (from.getRow() != to.getRow() && from.getCol() != to.getCol()) {
 			return false;
 		} else if (from.getRow() == to.getRow()) {
-			for (int i = from.getCol(); i < to.getCol(); i++) {
+			int direction;
+			if (from.getCol() < to.getCol())
+				direction = 1;
+			else
+				direction = -1;
+
+			for (int i = from.getCol() + direction; i != to.getCol(); i += direction) {
 				if (board.getBox(from.getRow(), i) != null)
 
 					return false;
 			}
 		} else if (from.getCol() == to.getCol()) {
-			for (int i = from.getRow(); i < to.getRow(); i++) {
+			int direction;
+			if (from.getRow() < to.getRow())
+				direction = 1;
+			else
+				direction = -1;
+			for (int i = from.getRow() + direction; i != to.getRow(); i += direction) {
 				if (board.getBox(i, from.getCol()) != null)
 
 					return false;

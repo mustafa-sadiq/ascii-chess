@@ -61,7 +61,7 @@ public class ChessGame {
 		} else if (this.whiteTurn != from.getPiece().isWhite()) { 
 			System.out.println("Can't move opponent piece! Try again");
 		}
-		else if (to.getPiece() != null && from.getPiece().isWhite() == from.getPiece().isWhite()) {
+		else if (to.getPiece() != null && from.getPiece().isWhite() == to.getPiece().isWhite()) {
 			System.out.println("Can't move to own piece! Try again");
 		} else if (to.getPiece() != null) {
 			movedAndKill(from, to);
@@ -80,7 +80,7 @@ public class ChessGame {
 			System.out.println();
 			board.printBoard();
 			System.out.println();
-			//this.whiteTurn = !this.whiteTurn;
+			this.whiteTurn = !this.whiteTurn;
 			
 		} else {
 			System.out.println("Illegal move, try again");
@@ -91,7 +91,17 @@ public class ChessGame {
 
 	public void movedAndKill(Spot from, Spot to) {
 		System.out.println("Trying to move and kill");
-		this.whiteTurn = !this.whiteTurn;
+		if (from.getPiece().canMove(board, from, to)) {
+			to.setPiece(from.getPiece());
+			from.setPiece(null);
+			System.out.println();
+			board.printBoard();
+			System.out.println();
+			this.whiteTurn = !this.whiteTurn;
+			
+		} else {
+			System.out.println("Illegal move, try again");
+		}
 	}
 
 }
