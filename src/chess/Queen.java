@@ -8,14 +8,18 @@ public class Queen extends Piece {
 	}
 
 	@Override
-	public boolean canMove(Board board, Spot start, Spot end) {
+	public boolean canMove(Board board, Spot from, Spot to) {
 		// TODO Auto-generated method stub
-		return new Rook(this.isWhite()).canMove(board, start, end) || new Bishop(this.isWhite()).canMove(board, start, end);
+		return new Rook(from.getPiece().isWhite()).canMove(board, from, to)
+				|| new Bishop(from.getPiece().isWhite()).canMove(board, from, to);
 	}
+
 	@Override
 	public String toString() {
-		if (this.isWhite()) return "wQ";
-		else return "bQ";
+		if (this.isWhite())
+			return "wQ";
+		else
+			return "bQ";
 	}
 
 }

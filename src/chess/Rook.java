@@ -20,7 +20,7 @@ public class Rook extends Piece {
 				direction = -1;
 
 			for (int i = from.getCol() + direction; i != to.getCol(); i += direction) {
-				if (board.getBox(from.getRow(), i) != null)
+				if (board.getBox(from.getRow(), i).getPiece() != null)
 
 					return false;
 			}
@@ -31,7 +31,7 @@ public class Rook extends Piece {
 			else
 				direction = -1;
 			for (int i = from.getRow() + direction; i != to.getRow(); i += direction) {
-				if (board.getBox(i, from.getCol()) != null)
+				if (board.getBox(i, from.getCol()).getPiece() != null)
 
 					return false;
 			}
