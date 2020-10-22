@@ -10,7 +10,7 @@ public class Queen extends Piece {
 	@Override
 	public boolean canMove(Board board, Spot start, Spot end) {
 		// TODO Auto-generated method stub
-		return false;
+		return new Rook(this.isWhite()).canMove(board, start, end) || new Bishop(this.isWhite()).canMove(board, start, end);
 	}
 	@Override
 	public String toString() {

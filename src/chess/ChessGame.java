@@ -6,14 +6,12 @@ public class ChessGame {
 	Board board;
 	boolean whiteTurn;
 	boolean gameFinished;
-	Spot spotPlacebo;
 
 	public ChessGame() {
 		whiteTurn = true;
 		gameFinished = false;
 		board = new Board();
 		board.printBoard();
-		spotPlacebo = new Spot(1, 0, new Pawn(true));
 	}
 
 	public void play() {
@@ -60,17 +58,22 @@ public class ChessGame {
 	public void move(Spot from, Spot to) {
 		if (from.getPiece() == null) {
 			System.out.println("No piece to move! Try again");
-		} else if (to.getPiece() != null && from.getPiece().isWhite() == from.getPiece().isWhite()) {
+		} else if (this.whiteTurn != from.getPiece().isWhite()) { 
+			System.out.println("Can't move opponent piece! Try again");
+		}
+		else if (to.getPiece() != null && from.getPiece().isWhite() == from.getPiece().isWhite()) {
 			System.out.println("Can't move to own piece! Try again");
 		} else if (to.getPiece() != null) {
 			movedAndKill(from, to);
 		} else {
 			moveToEmpty(from, to);
 		}
+		
+		
 	}
 
 	public void moveToEmpty(Spot from, Spot to) {
-		System.out.println("Tring to move");
+		//System.out.println("Tring to move");
 		if (from.getPiece().canMove(board, from, to)) {
 			to.setPiece(from.getPiece());
 			from.setPiece(null);
@@ -78,10 +81,13 @@ public class ChessGame {
 		} else {
 			System.out.println("Illegal move, try again");
 		}
+		
+		this.whiteTurn = !this.whiteTurn;
 	}
 
 	public void movedAndKill(Spot from, Spot to) {
-		System.out.println("Tring to move and kill");
+		//System.out.println("Tring to move and kill");
+		this.whiteTurn = !this.whiteTurn;
 	}
 
 }
