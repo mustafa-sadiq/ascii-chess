@@ -4,7 +4,7 @@
 ```
 bR bN bB bQ bK bB bN bR 8  7
 bp bp bp bp bp bp bp bp 7  6
-   ##    ##    ##    ## 6  5 
+   ##    ##    ##    ## 6  5  Rows
 ##    ##    ##    ##    5  4
    ##    ##    ##    ## 4  3
 ##    ##    ##    ##    3  2 
@@ -13,3 +13,6 @@ wR wN wB wQ wK wB wN wR 1  0
  a  b  c  d  e  f  g  h
  0  1  2  3  4  5  6  7
 ```
+Column
+
+```boxes[row = X][col = Y] = Spot at row X and col Y``` 
