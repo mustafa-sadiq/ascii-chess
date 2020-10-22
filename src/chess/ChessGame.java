@@ -48,9 +48,9 @@ public class ChessGame {
 
 		}
 
-		if (whiteTurn && gameFinished) {
+		if (whiteTurn) {
 			System.out.println("Black wins");
-		}
+		} else System.out.println("White wins");
 
 		scanner.close();
 	}
