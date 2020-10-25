@@ -29,7 +29,7 @@ public class ChessGame {
 
 			if (input.equals("draw")) {
 				gameFinished = true;
-			}  else {
+			} else {
 
 				int fromCol = x.indexOf(input.charAt(0));
 				int fromRow = input.charAt(1) - '0' - 1;
@@ -56,22 +56,24 @@ public class ChessGame {
 		scanner.close();
 	}
 
-	public void move(Spot from, Spot to) {
+	public boolean move(Spot from, Spot to, boolean makeMove) {
 		if (from.getPiece() == null) {
 			System.out.println("No piece to move! Try again");
-			// return false;
+			return false;
 		} else if (this.whiteTurn != from.getPiece().isWhite()) {
 			System.out.println("Can't move opponent piece! Try again");
-			// return false;
+			return false;
 		} else if (to.getPiece() != null && from.getPiece().isWhite() == to.getPiece().isWhite()) {
 			System.out.println("Can't move to own piece! Try again");
-			// return false;
-		} else if (from.getPiece().canMove(board, from, to)) {
+			return false;
+		} else if (from.getPiece().canMove(board, from, to) && makeMove) {
 			makeMove(from, to);
-			// return true;
+			return true;
+		} else if (from.getPiece().canMove(board, from, to) && !makeMove) {
+			return true;
 		} else {
 			System.out.println("Illegal move, try again");
-			// return false;
+			return false;
 		}
 
 		// return false;
