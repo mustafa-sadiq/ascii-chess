@@ -5,12 +5,16 @@ import java.util.Scanner;
 public class ChessGame {
 	Board board;
 	boolean whiteTurn;
+	boolean blackInCheck;
+	boolean whiteInCheck;
 	boolean gameFinished;
 
 	public ChessGame() {
 		whiteTurn = true;
 		gameFinished = false;
 		board = new Board();
+		blackInCheck = false;
+		whiteInCheck = false;
 	}
 
 	public void play() {
@@ -19,6 +23,8 @@ public class ChessGame {
 		board.printBoard();
 		System.out.println();
 		while (!gameFinished) {
+			if (isInCheck(whiteTurn))
+				System.out.println("Check");
 			if (whiteTurn) {
 				System.out.print("White's move: ");
 			} else {
@@ -44,6 +50,11 @@ public class ChessGame {
 				System.out.println("Trying moving to: " + spotTo.toString());
 
 				move(spotFrom, spotTo, true);
+
+				if (isCheckmate(whiteTurn)) {
+					System.out.println("Checkmate");
+					gameFinished = true;
+				}
 			}
 
 		}
@@ -58,39 +69,63 @@ public class ChessGame {
 
 	public boolean move(Spot from, Spot to, boolean makeMove) {
 		if (from.getPiece() == null) {
-			System.out.println("No piece to move! Try again");
+			if (makeMove) {
+				System.out.println("No piece to move! Try again");
+			}
 			return false;
-		} else if (this.whiteTurn != from.getPiece().isWhite()) {
-			System.out.println("Can't move opponent piece! Try again");
+		}
+
+		else if (this.whiteTurn != from.getPiece().isWhite()) {
+			if (makeMove) {
+				System.out.println("Can't move opponent piece! Try again");
+			}
 			return false;
-		} else if (to.getPiece() != null && from.getPiece().isWhite() == to.getPiece().isWhite()) {
-			System.out.println("Can't move to own piece! Try again");
+		}
+
+		else if (to.getPiece() != null && from.getPiece().isWhite() == to.getPiece().isWhite()) {
+			if (makeMove) {
+				System.out.println("Can't move to own piece! Try again");
+			}
 			return false;
-		} else if (from.getPiece().canMove(board, from, to) && makeMove) {
+		}
+
+		else if (from.getPiece().canMove(board, from, to) && makeMove) {
 			makeMove(from, to);
 			return true;
-		} else if (from.getPiece().canMove(board, from, to) && !makeMove) {
+		}
+
+		else if (from.getPiece().canMove(board, from, to) && !makeMove) {
 			return true;
-		} else {
+		}
+
+		else if (makeMove) {
 			System.out.println("Illegal move, try again");
 			return false;
 		}
 
-		// return false;
+		return false;
 
 	}
 
 	public void makeMove(Spot from, Spot to) {
+
+		
+		
 		System.out.println("Trying to move");
 		to.setPiece(from.getPiece());
 		from.setPiece(null);
 		System.out.println();
 		board.printBoard();
 		System.out.println();
-
+			
+		if (isInCheck(whiteTurn)) {
+			this.whiteTurn = !this.whiteTurn;
+			this.gameFinished = true;
+		}
+		
 		this.whiteTurn = !this.whiteTurn;
-		if (isInCheck(whiteTurn))
-			System.out.println("Check");
+		
+		
 
 	}
 
@@ -115,6 +150,10 @@ public class ChessGame {
 				if (board.getSpot(row, col).getPiece() != null
 						&& board.getSpot(row, col).getPiece().isWhite() == !isWhite) {
 					if (board.getSpot(row, col).getPiece().canMove(board, board.getSpot(row, col), kingPos)) {
+						if (isWhite) {
+							whiteInCheck = true;
+						} else
+							blackInCheck = true;
 						return true;
 					}
 				}
@@ -134,7 +173,7 @@ public class ChessGame {
 						if (board.getSpot(x, y).getPiece() != null) {
 							if (board.getSpot(x, y).getPiece().isWhite() == isWhite) {
 								if (move(board.getSpot(x, y), board.getSpot(z, w), false)) {
-									return true;
+									return false;
 								}
 							}
 						}
@@ -142,7 +181,7 @@ public class ChessGame {
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 
 }
