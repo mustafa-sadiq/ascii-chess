@@ -26,11 +26,11 @@ public class Pawn extends Piece {
 		if (from.getCol() == to.getCol()) {
 			// Not taking a piece
 			if (from.getPiece().isWhite()) {
-				if (board.getBox(from.getRow()+1, from.getCol()).getPiece() != null) {
+				if (board.getSpot(from.getRow()+1, from.getCol()).getPiece() != null) {
 					return false;
 				}
 			} else {
-				if (board.getBox(from.getRow()-1, from.getCol()).getPiece() != null) {
+				if (board.getSpot(from.getRow()-1, from.getCol()).getPiece() != null) {
 					return false;
 				}
 			}
@@ -44,11 +44,11 @@ public class Pawn extends Piece {
 				}
 
 				if (from.getPiece().isWhite()) {
-					if (board.getBox(from.getRow()+2, from.getCol()).getPiece() != null) {
+					if (board.getSpot(from.getRow()+2, from.getCol()).getPiece() != null) {
 						return false;
 					}
 				} else {
-					if (board.getBox(from.getRow()-2, from.getCol()).getPiece() != null) {
+					if (board.getSpot(from.getRow()-2, from.getCol()).getPiece() != null) {
 						return false;
 					}
 				}
@@ -62,7 +62,7 @@ public class Pawn extends Piece {
 				return false;
 			}
 
-			if (board.getBox(to.getRow(), to.getCol()).getPiece() == null) {
+			if (board.getSpot(to.getRow(), to.getCol()).getPiece() == null) {
 				return false;
 			}
 		}

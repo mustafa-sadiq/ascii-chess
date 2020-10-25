@@ -29,7 +29,7 @@ public class ChessGame {
 
 			if (input.equals("draw")) {
 				gameFinished = true;
-			} else {
+			}  else {
 
 				int fromCol = x.indexOf(input.charAt(0));
 				int fromRow = input.charAt(1) - '0' - 1;
@@ -37,8 +37,8 @@ public class ChessGame {
 				int toCol = x.indexOf(input.charAt(3));
 				int toRow = input.charAt(4) - '0' - 1;
 
-				Spot spotFrom = board.getBox(fromRow, fromCol);
-				Spot spotTo = board.getBox(toRow, toCol);
+				Spot spotFrom = board.getSpot(fromRow, fromCol);
+				Spot spotTo = board.getSpot(toRow, toCol);
 
 				System.out.println("Trying moving from: " + spotFrom.toString());
 				System.out.println("Trying moving to: " + spotTo.toString());
@@ -59,61 +59,45 @@ public class ChessGame {
 	public void move(Spot from, Spot to) {
 		if (from.getPiece() == null) {
 			System.out.println("No piece to move! Try again");
+			// return false;
 		} else if (this.whiteTurn != from.getPiece().isWhite()) {
 			System.out.println("Can't move opponent piece! Try again");
+			// return false;
 		} else if (to.getPiece() != null && from.getPiece().isWhite() == to.getPiece().isWhite()) {
 			System.out.println("Can't move to own piece! Try again");
-		} else if (to.getPiece() != null) {
-			movedAndKill(from, to);
+			// return false;
+		} else if (from.getPiece().canMove(board, from, to)) {
+			makeMove(from, to);
+			// return true;
 		} else {
-			moveToEmpty(from, to);
+			System.out.println("Illegal move, try again");
+			// return false;
 		}
+
+		// return false;
 
 	}
 
-	public void moveToEmpty(Spot from, Spot to) {
+	public void makeMove(Spot from, Spot to) {
 		System.out.println("Trying to move");
-		if (from.getPiece().canMove(board, from, to)) {
-			to.setPiece(from.getPiece());
-			from.setPiece(null);
-			System.out.println();
-			board.printBoard();
-			System.out.println();
+		to.setPiece(from.getPiece());
+		from.setPiece(null);
+		System.out.println();
+		board.printBoard();
+		System.out.println();
 
-			this.whiteTurn = !this.whiteTurn;
-			if (isInCheck(whiteTurn))
-				System.out.println("Check");
+		this.whiteTurn = !this.whiteTurn;
+		if (isInCheck(whiteTurn))
+			System.out.println("Check");
 
-		} else {
-			System.out.println("Illegal move, try again");
-		}
-
-	}
-
-	public void movedAndKill(Spot from, Spot to) {
-		System.out.println("Trying to move and kill");
-		if (from.getPiece().canMove(board, from, to)) {
-			to.setPiece(from.getPiece());
-			from.setPiece(null);
-			System.out.println();
-			board.printBoard();
-			System.out.println();
-
-			this.whiteTurn = !this.whiteTurn;
-			if (isInCheck(whiteTurn))
-				System.out.println("Check");
-
-		} else {
-			System.out.println("Illegal move, try again");
-		}
 	}
 
 	public Spot getKingSpot(boolean isWhite) {
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				if (board.boxes[row][col].getPiece() instanceof King
-						&& board.boxes[row][col].getPiece().isWhite() == isWhite) {
-					return board.getBox(row, col);
+				if (board.getSpot(row, col).getPiece() instanceof King
+						&& board.getSpot(row, col).getPiece().isWhite() == isWhite) {
+					return board.getSpot(row, col);
 				}
 			}
 		}
@@ -126,15 +110,46 @@ public class ChessGame {
 
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				if (board.getBox(row, col).getPiece() != null
-						&& board.getBox(row, col).getPiece().isWhite() == !isWhite) {
-					if (board.getBox(row, col).getPiece().canMove(board, board.getBox(row, col), kingPos)) {
+				if (board.getSpot(row, col).getPiece() != null
+						&& board.getSpot(row, col).getPiece().isWhite() == !isWhite) {
+					if (board.getSpot(row, col).getPiece().canMove(board, board.getSpot(row, col), kingPos)) {
 						return true;
 					}
 				}
 			}
 		}
 
+		return false;
+	}
+
+	public boolean isCheckmate(Boolean isWhite) {
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				// Spot (x,y)
+				for (int z = 0; z < 8; z++) {
+					for (int w = 0; w < 8; w++) {
+						// Spot (z, w)
+						if (board.getSpot(x, y).getPiece() != null) {
+							if (board.getSpot(z, w).getPiece() != null) {
+								if (board.getSpot(x, y).getPiece().isWhite() == isWhite) {
+									if (board.getSpot(x, y).getPiece().isWhite() != board.getSpot(z, w).getPiece()
+											.isWhite()
+											&& board.getSpot(x, y).getPiece().canMove(board, board.getSpot(x, y),
+													board.getSpot(z, w)))
+										return false;
+
+								}
+
+							} else if (board.getSpot(z, w).getPiece() == null) {
+								if (board.getSpot(x, y).getPiece().canMove(board, board.getSpot(x, y),
+										board.getSpot(z, w)))
+									return false;
+							}
+						}
+					}
+				}
+			}
+		}
 		return false;
 	}
 
