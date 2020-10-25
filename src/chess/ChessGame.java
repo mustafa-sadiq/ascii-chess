@@ -79,12 +79,10 @@ public class ChessGame {
 			System.out.println();
 			board.printBoard();
 			System.out.println();
-			
-
-		
 
 			this.whiteTurn = !this.whiteTurn;
-			if (isInCheck(whiteTurn)) System.out.println("Check");	
+			if (isInCheck(whiteTurn))
+				System.out.println("Check");
 
 		} else {
 			System.out.println("Illegal move, try again");
@@ -101,13 +99,9 @@ public class ChessGame {
 			board.printBoard();
 			System.out.println();
 
-				
-		
-			
 			this.whiteTurn = !this.whiteTurn;
-			if (isInCheck(whiteTurn)) System.out.println("Check");
-				
-			
+			if (isInCheck(whiteTurn))
+				System.out.println("Check");
 
 		} else {
 			System.out.println("Illegal move, try again");
@@ -117,7 +111,8 @@ public class ChessGame {
 	public Spot getKingSpot(boolean isWhite) {
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				if (board.boxes[row][col].getPiece() instanceof King && board.boxes[row][col].getPiece().isWhite() == isWhite) {
+				if (board.boxes[row][col].getPiece() instanceof King
+						&& board.boxes[row][col].getPiece().isWhite() == isWhite) {
 					return board.getBox(row, col);
 				}
 			}
@@ -129,10 +124,10 @@ public class ChessGame {
 		Spot kingPos = getKingSpot(isWhite);
 		System.out.println(kingPos);
 
-
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				if (board.getBox(row, col).getPiece() != null && board.getBox(row, col).getPiece().isWhite()==!isWhite) {
+				if (board.getBox(row, col).getPiece() != null
+						&& board.getBox(row, col).getPiece().isWhite() == !isWhite) {
 					if (board.getBox(row, col).getPiece().canMove(board, board.getBox(row, col), kingPos)) {
 						return true;
 					}
