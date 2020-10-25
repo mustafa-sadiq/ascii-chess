@@ -94,5 +94,117 @@ public class Board {
 		// System.out.println("Black king: " + getKingSpot(false));
 		// System.out.println("White king: " + getKingSpot(true));
 	}
+	
+	public Spot getKingSpot(boolean isWhite) {
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				if (getSpot(row, col).getPiece() instanceof King
+						&& getSpot(row, col).getPiece().isWhite() == isWhite) {
+					return getSpot(row, col);
+				}
+			}
+		}
+		return new Spot(0, 0, null);
+	}
+	
+	public boolean isInCheck(boolean isWhite) {
+		Spot kingPos = getKingSpot(isWhite);
+		System.out.println(kingPos);
+
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				if (getSpot(row, col).getPiece() != null
+						&& getSpot(row, col).getPiece().isWhite() == !isWhite) {
+					if (getSpot(row, col).getPiece().canMove(this, getSpot(row, col), kingPos)) {
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+	
+	public boolean isCheckmate(Boolean isWhite) {
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				// Spot (x,y)
+				for (int z = 0; z < 8; z++) {
+					for (int w = 0; w < 8; w++) {
+						// Spot (z, w)
+						if (getSpot(x, y).getPiece() != null) {
+							if (getSpot(x, y).getPiece().isWhite() == isWhite) {
+								if (move(getSpot(x, y), getSpot(z, w), false)) {
+									return false;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
+	public boolean move(Spot from, Spot to, boolean makeMove) {
+		if (from.getPiece() == null) {
+			if (makeMove) {
+				System.out.println("No piece to move! Try again");
+			}
+			return false;
+		}
+
+		else if (this.whiteTurn != from.getPiece().isWhite()) {
+			if (makeMove) {
+				System.out.println("Can't move opponent piece! Try again");
+			}
+			return false;
+		}
+
+		else if (to.getPiece() != null && from.getPiece().isWhite() == to.getPiece().isWhite()) {
+			if (makeMove) {
+				System.out.println("Can't move to own piece! Try again");
+			}
+			return false;
+		}
+
+		else if (from.getPiece().canMove(board, from, to) && makeMove) {
+			
+			makeMove(from, to);
+			return true;
+		}
+
+		else if (from.getPiece().canMove(board, from, to) && !makeMove) {
+			return true;
+		}
+
+		else if (makeMove) {
+			System.out.println("Illegal move, try again");
+			return false;
+		}
+
+		return false;
+
+	}
+
+	public void makeMove(Spot from, Spot to) {
+
+		System.out.println("Trying to move");
+		to.setPiece(from.getPiece());
+		from.setPiece(null);
+		System.out.println();
+		board.printBoard();
+		System.out.println();
+
+		if (isInCheck(whiteTurn)) {
+			this.whiteTurn = !this.whiteTurn;
+			System.out.println("Checkmate");
+			this.gameFinished = true;
+		}
+
+		this.whiteTurn = !this.whiteTurn;
+
+	}
+
 
 }
