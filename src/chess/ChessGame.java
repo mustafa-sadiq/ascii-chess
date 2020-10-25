@@ -43,7 +43,7 @@ public class ChessGame {
 				System.out.println("Trying moving from: " + spotFrom.toString());
 				System.out.println("Trying moving to: " + spotTo.toString());
 
-				move(spotFrom, spotTo);
+				move(spotFrom, spotTo, true);
 			}
 
 		}
@@ -132,20 +132,10 @@ public class ChessGame {
 					for (int w = 0; w < 8; w++) {
 						// Spot (z, w)
 						if (board.getSpot(x, y).getPiece() != null) {
-							if (board.getSpot(z, w).getPiece() != null) {
-								if (board.getSpot(x, y).getPiece().isWhite() == isWhite) {
-									if (board.getSpot(x, y).getPiece().isWhite() != board.getSpot(z, w).getPiece()
-											.isWhite()
-											&& board.getSpot(x, y).getPiece().canMove(board, board.getSpot(x, y),
-													board.getSpot(z, w)))
-										return false;
-
+							if (board.getSpot(x, y).getPiece().isWhite() == isWhite) {
+								if (move(board.getSpot(x, y), board.getSpot(z, w), false)) {
+									return true;
 								}
-
-							} else if (board.getSpot(z, w).getPiece() == null) {
-								if (board.getSpot(x, y).getPiece().canMove(board, board.getSpot(x, y),
-										board.getSpot(z, w)))
-									return false;
 							}
 						}
 					}
