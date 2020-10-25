@@ -80,9 +80,11 @@ public class ChessGame {
 			board.printBoard();
 			System.out.println();
 			
-			if (isInCheck(whiteTurn)) System.out.println("Check");	
+
+		
 
 			this.whiteTurn = !this.whiteTurn;
+			if (isInCheck(whiteTurn)) System.out.println("Check");	
 
 		} else {
 			System.out.println("Illegal move, try again");
@@ -98,9 +100,12 @@ public class ChessGame {
 			System.out.println();
 			board.printBoard();
 			System.out.println();
-			if (isInCheck(whiteTurn)) System.out.println("Check");	
-			this.whiteTurn = !this.whiteTurn;
+
+				
+		
 			
+			this.whiteTurn = !this.whiteTurn;
+			if (isInCheck(whiteTurn)) System.out.println("Check");
 				
 			
 
@@ -122,6 +127,8 @@ public class ChessGame {
 
 	public boolean isInCheck(boolean isWhite) {
 		Spot kingPos = getKingSpot(isWhite);
+		System.out.println(kingPos);
+
 
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
