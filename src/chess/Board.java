@@ -12,6 +12,14 @@ public class Board {
 		return boxes[x][y];
 	}
 
+	public Board clone() {
+		Board clone = new Board();
+
+		clone.boxes = this.boxes.clone();
+
+		return clone;
+	}
+
 	public void resetBoard() {
 		// initialize white pieces
 		boxes[0][0] = new Spot(0, 0, new Rook(true));
@@ -61,15 +69,14 @@ public class Board {
 
 	public void printBoard() {
 		boolean hashtags = true;
-		
+
 		for (int i = 7; i >= 0; i--) {
 			for (int j = 0; j <= 8; j++) {
 				if (j != 8) {
 					if (boxes[i][j].getPiece() != null) {
 						System.out.print(boxes[i][j] + " ");
 						hashtags = !hashtags;
-					}					
-					else {
+					} else {
 						if (!hashtags) {
 							System.out.print("##" + " ");
 						} else {
@@ -85,11 +92,9 @@ public class Board {
 			System.out.println();
 		}
 		System.out.println(" a  b  c  d  e  f  g  h");
-		
-		//System.out.println("Black king: " + getKingSpot(false));
-		//System.out.println("White king: " + getKingSpot(true));
+
+		// System.out.println("Black king: " + getKingSpot(false));
+		// System.out.println("White king: " + getKingSpot(true));
 	}
-	
-	
 
 }
