@@ -5,16 +5,12 @@ import java.util.Scanner;
 public class ChessGame {
 	Board board;
 	boolean whiteTurn;
-	boolean blackInCheck;
-	boolean whiteInCheck;
 	boolean gameFinished;
 
 	public ChessGame() {
 		whiteTurn = true;
 		gameFinished = false;
 		board = new Board();
-		blackInCheck = false;
-		whiteInCheck = false;
 	}
 
 	public void play() {
@@ -109,23 +105,19 @@ public class ChessGame {
 
 	public void makeMove(Spot from, Spot to) {
 
-		
-		
 		System.out.println("Trying to move");
 		to.setPiece(from.getPiece());
 		from.setPiece(null);
 		System.out.println();
 		board.printBoard();
 		System.out.println();
-			
+
 		if (isInCheck(whiteTurn)) {
 			this.whiteTurn = !this.whiteTurn;
 			this.gameFinished = true;
 		}
-		
+
 		this.whiteTurn = !this.whiteTurn;
-		
-		
 
 	}
 
@@ -150,10 +142,6 @@ public class ChessGame {
 				if (board.getSpot(row, col).getPiece() != null
 						&& board.getSpot(row, col).getPiece().isWhite() == !isWhite) {
 					if (board.getSpot(row, col).getPiece().canMove(board, board.getSpot(row, col), kingPos)) {
-						if (isWhite) {
-							whiteInCheck = true;
-						} else
-							blackInCheck = true;
 						return true;
 					}
 				}
