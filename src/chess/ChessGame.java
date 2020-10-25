@@ -6,11 +6,23 @@ public class ChessGame {
 	Board board;
 	boolean whiteTurn;
 	boolean gameFinished;
+	boolean draw;
 
 	public ChessGame() {
 		whiteTurn = true;
 		gameFinished = false;
 		board = new Board();
+		draw = false;
+	}
+	
+	public ChessGame clone() {
+		ChessGame clone = new ChessGame();
+		clone.board = this.board.clone();
+		clone.whiteTurn = this.whiteTurn;
+		clone.gameFinished = this.gameFinished;
+		clone.draw = this.draw;
+		
+		return clone;
 	}
 
 	public void play() {
@@ -19,8 +31,13 @@ public class ChessGame {
 		board.printBoard();
 		System.out.println();
 		while (!gameFinished) {
+			if (isCheckmate(whiteTurn)) {
+				System.out.println("Checkmate");
+				gameFinished = true;
+			}
 			if (isInCheck(whiteTurn))
 				System.out.println("Check");
+
 			if (whiteTurn) {
 				System.out.print("White's move: ");
 			} else {
@@ -47,10 +64,6 @@ public class ChessGame {
 
 				move(spotFrom, spotTo, true);
 
-				if (isCheckmate(whiteTurn)) {
-					System.out.println("Checkmate");
-					gameFinished = true;
-				}
 			}
 
 		}
@@ -114,6 +127,7 @@ public class ChessGame {
 
 		if (isInCheck(whiteTurn)) {
 			this.whiteTurn = !this.whiteTurn;
+			System.out.println("Checkmate");
 			this.gameFinished = true;
 		}
 
