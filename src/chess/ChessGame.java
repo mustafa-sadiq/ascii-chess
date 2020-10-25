@@ -10,7 +10,7 @@ public class ChessGame {
 	public ChessGame() {
 		whiteTurn = true;
 		gameFinished = false;
-		board = new Board();			
+		board = new Board();
 	}
 
 	public void play() {
@@ -50,7 +50,8 @@ public class ChessGame {
 
 		if (whiteTurn) {
 			System.out.println("Black wins");
-		} else System.out.println("White wins");
+		} else
+			System.out.println("White wins");
 
 		scanner.close();
 	}
@@ -58,18 +59,16 @@ public class ChessGame {
 	public void move(Spot from, Spot to) {
 		if (from.getPiece() == null) {
 			System.out.println("No piece to move! Try again");
-		} else if (this.whiteTurn != from.getPiece().isWhite()) { 
+		} else if (this.whiteTurn != from.getPiece().isWhite()) {
 			System.out.println("Can't move opponent piece! Try again");
-		}
-		else if (to.getPiece() != null && from.getPiece().isWhite() == to.getPiece().isWhite()) {
+		} else if (to.getPiece() != null && from.getPiece().isWhite() == to.getPiece().isWhite()) {
 			System.out.println("Can't move to own piece! Try again");
 		} else if (to.getPiece() != null) {
 			movedAndKill(from, to);
 		} else {
 			moveToEmpty(from, to);
 		}
-		
-		
+
 	}
 
 	public void moveToEmpty(Spot from, Spot to) {
@@ -80,13 +79,15 @@ public class ChessGame {
 			System.out.println();
 			board.printBoard();
 			System.out.println();
-			this.whiteTurn = !this.whiteTurn;
 			
+			if (isInCheck(whiteTurn)) System.out.println("Check");	
+
+			this.whiteTurn = !this.whiteTurn;
+
 		} else {
 			System.out.println("Illegal move, try again");
 		}
-		
-		
+
 	}
 
 	public void movedAndKill(Spot from, Spot to) {
@@ -97,11 +98,42 @@ public class ChessGame {
 			System.out.println();
 			board.printBoard();
 			System.out.println();
+			if (isInCheck(whiteTurn)) System.out.println("Check");	
 			this.whiteTurn = !this.whiteTurn;
 			
+				
+			
+
 		} else {
 			System.out.println("Illegal move, try again");
 		}
+	}
+
+	public Spot getKingSpot(boolean isWhite) {
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				if (board.boxes[row][col].getPiece() instanceof King && board.boxes[row][col].getPiece().isWhite() == isWhite) {
+					return board.getBox(row, col);
+				}
+			}
+		}
+		return new Spot(0, 0, null);
+	}
+
+	public boolean isInCheck(boolean isWhite) {
+		Spot kingPos = getKingSpot(isWhite);
+
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				if (board.getBox(row, col).getPiece() != null && board.getBox(row, col).getPiece().isWhite()==!isWhite) {
+					if (board.getBox(row, col).getPiece().canMove(board, board.getBox(row, col), kingPos)) {
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
 	}
 
 }

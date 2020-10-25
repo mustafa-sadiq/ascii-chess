@@ -85,17 +85,9 @@ public class Board {
 			System.out.println();
 		}
 		System.out.println(" a  b  c  d  e  f  g  h");
-	}
-	
-	public Spot getKingSpot(boolean isWhite) {
-		for (int i = 0; i <= 7; i++) {
-			for (int j = 0; j <= 7; j++) {
-				if (boxes[i][j].getPiece() instanceof King && boxes[i][j].getPiece().isWhite() == isWhite) {
-					return boxes[i][j];
-				}
-			}
-		}
-		return new Spot(0, 0, null);
+		
+		//System.out.println("Black king: " + getKingSpot(false));
+		//System.out.println("White king: " + getKingSpot(true));
 	}
 	
 	
