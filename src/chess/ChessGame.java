@@ -26,18 +26,24 @@ public class ChessGame {
 		System.out.println();
 
 		while (!gameFinished) {
-			if (board.isInCheck(whiteTurn))
-				System.out.println("Check");
-
-			//System.out.println(board.isMovePossible(whiteTurn));
-
+			
 			if (!board.isMovePossible(whiteTurn)) {
-				System.out.println("Checkmate2");
+				System.out.println("Checkmate");
 				gameFinished = true;
 				end();
 			}
+			
+			
+
+			//System.out.println(board.isMovePossible(whiteTurn));
+
+			
 
 			if (!gameFinished) {
+				
+				if (board.isInCheck(whiteTurn))
+					System.out.println("Check");
+				
 				if (whiteTurn) {
 					System.out.print("White's move: ");
 				} else {
