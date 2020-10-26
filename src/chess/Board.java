@@ -167,7 +167,7 @@ public class Board {
 								try {
 									tryMove(getSpot(x, y), getSpot(z, w), isWhite, false);
 									
-									System.out.println(getSpot(x,y));
+									//System.out.println(getSpot(x,y));
 									
 									return true;
 								} catch (IllegalMoveException e) {

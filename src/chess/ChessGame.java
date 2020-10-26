@@ -29,7 +29,7 @@ public class ChessGame {
 			if (board.isInCheck(whiteTurn))
 				System.out.println("Check");
 
-			System.out.println(board.isMovePossible(whiteTurn));
+			//System.out.println(board.isMovePossible(whiteTurn));
 
 			if (!board.isMovePossible(whiteTurn)) {
 				System.out.println("Checkmate2");
