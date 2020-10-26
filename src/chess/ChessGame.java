@@ -22,7 +22,7 @@ public class ChessGame {
 	public void play() {
 		Scanner scanner = new Scanner(System.in);
 		String x = "abcdefgh";
-		board.printBoard();
+		board.printBoard(false);
 		System.out.println();
 		while (!gameFinished) {
 			if (board.isCheckmate(whiteTurn)) {
@@ -56,18 +56,30 @@ public class ChessGame {
 				System.out.println("Trying moving from: " + spotFrom.toString());
 				System.out.println("Trying moving to: " + spotTo.toString());
 
-				board.tryMove(spotFrom, spotTo, whiteTurn, true);
+				try {
+					board.tryMove(spotFrom, spotTo, whiteTurn, true);
+					board.printBoard(true);
+					if (board.isInCheck(whiteTurn)) {
+						whiteTurn = !whiteTurn;
+						System.out.println("Checkmate");
+						this.gameFinished = true;
+					}
+					
+					whiteTurn = !whiteTurn;
+				} catch (IllegalMoveException e) {
+
+				}
 
 			}
 
 		}
 
-				
 		if (whiteTurn && !gamedraw) {
 			System.out.println("Black wins");
 		} else if (!gamedraw)
 			System.out.println("White wins");
-		else System.out.println("Draw");
+		else
+			System.out.println("Draw");
 
 		scanner.close();
 	}

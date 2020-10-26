@@ -65,7 +65,9 @@ public class Board {
 		}
 	}
 
-	public void printBoard() {
+	public void printBoard(boolean lines) {
+		
+		if (lines) System.out.println();
 		boolean hashtags = true;
 
 		for (int i = 7; i >= 0; i--) {
@@ -90,6 +92,7 @@ public class Board {
 			System.out.println();
 		}
 		System.out.println(" a  b  c  d  e  f  g  h");
+		if (lines) System.out.println();
 
 		// System.out.println("Black king: " + getKingSpot(false));
 		// System.out.println("White king: " + getKingSpot(true));
