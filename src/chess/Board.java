@@ -134,7 +134,7 @@ public class Board {
 							if (getSpot(x, y).getPiece().isWhite() == isWhite) {
 								
 								try {
-									move(getSpot(x, y), getSpot(z, w), isWhite, false);
+									tryMove(getSpot(x, y), getSpot(z, w), isWhite, false);
 									return false;
 								} catch (IllegalMoveException e) {								
 									
@@ -162,7 +162,7 @@ public class Board {
 		}
 
 		else if (from.getPiece().canMove(this, from, to)) {
-			makeMove(from, to, whiteTurn);
+			makeMove(from, to);
 		}
 
 		else {
@@ -173,12 +173,9 @@ public class Board {
 
 	public void makeMove(Spot from, Spot to) {
 
-		System.out.println("Trying to move");
+		System.out.println("Making move");
 		to.setPiece(from.getPiece());
 		from.setPiece(null);
-		System.out.println();
-		printBoard();
-		System.out.println();
 //
 //		if (isInCheck(whiteTurn)) {
 //			whiteTurn = !whiteTurn;

@@ -6,7 +6,7 @@ public class ChessGame {
 	private Board board;
 	private boolean whiteTurn;
 	private boolean gameFinished;
-	private boolean draw;
+	private boolean gamedraw;
 
 	public boolean getWhiteTurn() {
 		return this.whiteTurn;
@@ -16,7 +16,7 @@ public class ChessGame {
 		whiteTurn = true;
 		gameFinished = false;
 		board = new Board();
-		draw = false;
+		gamedraw = false;
 	}
 
 	public void play() {
@@ -56,16 +56,18 @@ public class ChessGame {
 				System.out.println("Trying moving from: " + spotFrom.toString());
 				System.out.println("Trying moving to: " + spotTo.toString());
 
-				board.move(spotFrom, spotTo, whiteTurn, true);
+				board.tryMove(spotFrom, spotTo, whiteTurn, true);
 
 			}
 
 		}
 
-		if (whiteTurn) {
+				
+		if (whiteTurn && !gamedraw) {
 			System.out.println("Black wins");
-		} else
+		} else if (!gamedraw)
 			System.out.println("White wins");
+		else System.out.println("Draw");
 
 		scanner.close();
 	}
