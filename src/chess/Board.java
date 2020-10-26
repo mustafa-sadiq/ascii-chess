@@ -12,6 +12,10 @@ public class Board {
 		return spots[row][col];
 	}
 	
+	public Board (Spot[][] value) {
+		this.spots = value;
+	}
+	
 	private void setSpot(int row, int col, Spot spot) {
 		spots[row][col] = spot;
 	}
@@ -21,7 +25,6 @@ public class Board {
 		
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				if (spots[row][col].getPiece() != null)
 				clone.setSpot(row, col, spots[row][col].clone());
 			}
 		}
@@ -163,6 +166,9 @@ public class Board {
 
 								try {
 									tryMove(getSpot(x, y), getSpot(z, w), isWhite, false);
+									
+									System.out.println(getSpot(x,y));
+									
 									return true;
 								} catch (IllegalMoveException e) {
 
