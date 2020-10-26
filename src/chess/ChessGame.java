@@ -3,10 +3,14 @@ package chess;
 import java.util.Scanner;
 
 public class ChessGame {
-	Board board;
-	boolean whiteTurn;
-	boolean gameFinished;
-	boolean draw;
+	private Board board;
+	private boolean whiteTurn;
+	private boolean gameFinished;
+	private boolean draw;
+
+	public boolean getWhiteTurn() {
+		return this.whiteTurn;
+	}
 
 	public ChessGame() {
 		whiteTurn = true;
@@ -14,7 +18,7 @@ public class ChessGame {
 		board = new Board();
 		draw = false;
 	}
-	
+
 	public void play() {
 		Scanner scanner = new Scanner(System.in);
 		String x = "abcdefgh";
@@ -65,13 +69,5 @@ public class ChessGame {
 
 		scanner.close();
 	}
-
-	
-
-	
-
-	
-
-
 
 }

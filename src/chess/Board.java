@@ -132,8 +132,12 @@ public class Board {
 						// Spot (z, w)
 						if (getSpot(x, y).getPiece() != null) {
 							if (getSpot(x, y).getPiece().isWhite() == isWhite) {
-								if (move(getSpot(x, y), getSpot(z, w), false)) {
+								
+								try {
+									move(getSpot(x, y), getSpot(z, w), isWhite, false);
 									return false;
+								} catch (IllegalMoveException e) {								
+									
 								}
 							}
 						}
@@ -144,7 +148,7 @@ public class Board {
 		return true;
 	}
 
-	public void move(Spot from, Spot to, boolean whiteTurn, boolean makeMove) {
+	public void tryMove(Spot from, Spot to, boolean whiteTurn, boolean makeMove) {
 		if (from.getPiece() == null) {
 			throw new IllegalMoveException("No piece to move! Try again");
 		}
@@ -167,7 +171,7 @@ public class Board {
 
 	}
 
-	public void makeMove(Spot from, Spot to, boolean whiteTurn) {
+	public void makeMove(Spot from, Spot to) {
 
 		System.out.println("Trying to move");
 		to.setPiece(from.getPiece());
@@ -175,14 +179,14 @@ public class Board {
 		System.out.println();
 		printBoard();
 		System.out.println();
-
-		if (isInCheck(whiteTurn)) {
-			whiteTurn = !whiteTurn;
-			System.out.println("Checkmate");
-			this.gameFinished = true;
-		}
-
-		this.whiteTurn = !this.whiteTurn;
+//
+//		if (isInCheck(whiteTurn)) {
+//			whiteTurn = !whiteTurn;
+//			System.out.println("Checkmate");
+//			this.gameFinished = true;
+//		}
+//
+//		this.whiteTurn = !this.whiteTurn;
 
 	}
 
