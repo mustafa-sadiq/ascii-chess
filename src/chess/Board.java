@@ -67,6 +67,16 @@ public class Board {
 		spots[6][5] = new Spot(6, 5, new Pawn(false));
 		spots[6][6] = new Spot(6, 6, new Pawn(false));
 		spots[6][7] = new Spot(6, 7, new Pawn(false));
+		
+//		for debugging 
+//		for (int i = 0; i < 8; i++) {		
+//			for (int j = 0; j < 8; j++) {
+//				if (spots[i][j] == null) {
+//					spots[i][j] = new Spot(i, j, null);
+//				}
+//				
+//			}
+//		}
 
 		// initialize remaining boxes without any piece
 		for (int i = 2; i < 6; i++) {

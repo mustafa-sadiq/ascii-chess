@@ -28,62 +28,61 @@ public class ChessGame {
 		while (!gameFinished) {
 			if (board.isInCheck(whiteTurn))
 				System.out.println("Check");
-			
+
 			System.out.println(board.isMovePossible(whiteTurn));
-			
+
 			if (!board.isMovePossible(whiteTurn)) {
-				System.out.println("Checkmate");
-				gameFinished = true;
-				end();
-			} 
-
-
-			if (whiteTurn) {
-				System.out.print("White's move: ");
-			} else {
-				System.out.print("Black's move: ");
-			}
-
-			String input = scanner.nextLine();
-
-			if (input.equals("draw")) {
+				System.out.println("Checkmate2");
 				gameFinished = true;
 				end();
 			}
 
-			else if (input.equals("resign")) {
-				gameFinished = true;
-				end();
-			}
-
-			else {
-				Spot[] spots = readSpots(input);
-				Spot spotFrom = spots[0];
-				Spot spotTo = spots[1];
-
-				System.out.println("Trying moving from: " + spotFrom.toString());
-				System.out.println("Trying moving to: " + spotTo.toString());
-
-				try {
-					board.tryMove(spotFrom, spotTo, whiteTurn, true);
-					board.printBoard(true);
-					if (board.isInCheck(whiteTurn)) {
-						whiteTurn = !whiteTurn;
-						System.out.println("Checkmate");
-						this.gameFinished = true;
-					}
-
-					whiteTurn = !whiteTurn;
-				} catch (IllegalMoveException e) {
-
+			if (!gameFinished) {
+				if (whiteTurn) {
+					System.out.print("White's move: ");
+				} else {
+					System.out.print("Black's move: ");
 				}
 
+				String input = scanner.nextLine();
+
+				if (input.equals("draw")) {
+					gameFinished = true;
+					end();
+				}
+
+				else if (input.equals("resign")) {
+					gameFinished = true;
+					end();
+				}
+
+				else {
+					Spot[] spots = readSpots(input);
+					Spot spotFrom = spots[0];
+					Spot spotTo = spots[1];
+
+					System.out.println("Trying moving from: " + spotFrom.toString());
+					System.out.println("Trying moving to: " + spotTo.toString());
+
+					try {
+						board.tryMove(spotFrom, spotTo, whiteTurn, true);
+						board.printBoard(true);
+						if (board.isInCheck(whiteTurn)) {
+							System.out.println("Checkmate");
+							this.gameFinished = true;
+							end();
+						}
+
+						whiteTurn = !whiteTurn;
+					} catch (IllegalMoveException e) {
+
+					}
+
+				}
 			}
-			
-			
+
 		}
 
-		
 		scanner.close();
 	}
 
