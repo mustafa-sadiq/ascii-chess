@@ -61,8 +61,8 @@ public class ChessGame {
 					Spot spotFrom = spots[0];
 					Spot spotTo = spots[1];
 
-					System.out.println("Trying moving from: " + spotFrom.toString());
-					System.out.println("Trying moving to: " + spotTo.toString());
+					//System.out.println("Trying moving from: " + spotFrom.toString());
+					//System.out.println("Trying moving to: " + spotTo.toString());
 
 					try {
 						board.tryMove(spotFrom, spotTo, whiteTurn, true);
@@ -75,7 +75,7 @@ public class ChessGame {
 
 						whiteTurn = !whiteTurn;
 					} catch (IllegalMoveException e) {
-
+						System.out.println("Illegal move, try again");
 					}
 
 				}

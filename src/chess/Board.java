@@ -134,7 +134,7 @@ public class Board {
 
 	public boolean isInCheck(boolean isWhite) {
 		Spot kingPos = getKingSpot(isWhite);
-		System.out.println(kingPos);
+		//System.out.println(kingPos);
 
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
@@ -202,7 +202,7 @@ public class Board {
 				throw new IllegalMoveException("Illegal move, try again");
 			
 			else if (makeMove){
-				System.out.println("Making move");
+				//System.out.println("Making move");
 				makeMove(from, to);
 			}
 				
