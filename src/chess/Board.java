@@ -94,27 +94,25 @@ public class Board {
 		// System.out.println("Black king: " + getKingSpot(false));
 		// System.out.println("White king: " + getKingSpot(true));
 	}
-	
+
 	public Spot getKingSpot(boolean isWhite) {
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				if (getSpot(row, col).getPiece() instanceof King
-						&& getSpot(row, col).getPiece().isWhite() == isWhite) {
+				if (getSpot(row, col).getPiece() instanceof King && getSpot(row, col).getPiece().isWhite() == isWhite) {
 					return getSpot(row, col);
 				}
 			}
 		}
 		return new Spot(0, 0, null);
 	}
-	
+
 	public boolean isInCheck(boolean isWhite) {
 		Spot kingPos = getKingSpot(isWhite);
 		System.out.println(kingPos);
 
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				if (getSpot(row, col).getPiece() != null
-						&& getSpot(row, col).getPiece().isWhite() == !isWhite) {
+				if (getSpot(row, col).getPiece() != null && getSpot(row, col).getPiece().isWhite() == !isWhite) {
 					if (getSpot(row, col).getPiece().canMove(this, getSpot(row, col), kingPos)) {
 						return true;
 					}
@@ -124,7 +122,7 @@ public class Board {
 
 		return false;
 	}
-	
+
 	public boolean isCheckmate(Boolean isWhite) {
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
@@ -145,59 +143,41 @@ public class Board {
 		}
 		return true;
 	}
-	
-	public boolean move(Spot from, Spot to, boolean makeMove) {
+
+	public void move(Spot from, Spot to, boolean whiteTurn, boolean makeMove) {
 		if (from.getPiece() == null) {
-			if (makeMove) {
-				System.out.println("No piece to move! Try again");
-			}
-			return false;
+			throw new IllegalMoveException("No piece to move! Try again");
 		}
 
-		else if (this.whiteTurn != from.getPiece().isWhite()) {
-			if (makeMove) {
-				System.out.println("Can't move opponent piece! Try again");
-			}
-			return false;
+		else if (whiteTurn != from.getPiece().isWhite()) {
+			throw new IllegalMoveException("Can't move opponent piece! Try again");
 		}
 
 		else if (to.getPiece() != null && from.getPiece().isWhite() == to.getPiece().isWhite()) {
-			if (makeMove) {
-				System.out.println("Can't move to own piece! Try again");
-			}
-			return false;
+			throw new IllegalMoveException("Can't move to own piece! Try again");
 		}
 
-		else if (from.getPiece().canMove(board, from, to) && makeMove) {
-			
-			makeMove(from, to);
-			return true;
+		else if (from.getPiece().canMove(this, from, to)) {
+			makeMove(from, to, whiteTurn);
 		}
 
-		else if (from.getPiece().canMove(board, from, to) && !makeMove) {
-			return true;
+		else {
+			throw new IllegalMoveException("Illegal move, try again");
 		}
-
-		else if (makeMove) {
-			System.out.println("Illegal move, try again");
-			return false;
-		}
-
-		return false;
 
 	}
 
-	public void makeMove(Spot from, Spot to) {
+	public void makeMove(Spot from, Spot to, boolean whiteTurn) {
 
 		System.out.println("Trying to move");
 		to.setPiece(from.getPiece());
 		from.setPiece(null);
 		System.out.println();
-		board.printBoard();
+		printBoard();
 		System.out.println();
 
 		if (isInCheck(whiteTurn)) {
-			this.whiteTurn = !this.whiteTurn;
+			whiteTurn = !whiteTurn;
 			System.out.println("Checkmate");
 			this.gameFinished = true;
 		}
@@ -205,6 +185,5 @@ public class Board {
 		this.whiteTurn = !this.whiteTurn;
 
 	}
-
 
 }

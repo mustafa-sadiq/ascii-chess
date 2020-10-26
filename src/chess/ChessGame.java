@@ -15,16 +15,6 @@ public class ChessGame {
 		draw = false;
 	}
 	
-	public ChessGame clone() {
-		ChessGame clone = new ChessGame();
-		clone.board = this.board.clone();
-		clone.whiteTurn = this.whiteTurn;
-		clone.gameFinished = this.gameFinished;
-		clone.draw = this.draw;
-		
-		return clone;
-	}
-
 	public void play() {
 		Scanner scanner = new Scanner(System.in);
 		String x = "abcdefgh";
@@ -62,7 +52,7 @@ public class ChessGame {
 				System.out.println("Trying moving from: " + spotFrom.toString());
 				System.out.println("Trying moving to: " + spotTo.toString());
 
-				board.move(spotFrom, spotTo, true);
+				board.move(spotFrom, spotTo, whiteTurn, true);
 
 			}
 
