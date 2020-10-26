@@ -5,20 +5,31 @@ public class Board {
 
 	public Board() {
 		spots = new Spot[8][8];
-		resetBoard();
+		setBoard();
 	}
-
-	public Spot getSpot(int x, int y) {
-		return spots[x][y];
+	
+	public Spot getSpot(int row, int col) {
+		return spots[row][col];
+	}
+	
+	private void setSpot(int row, int col, Spot spot) {
+		spots[row][col] = spot;
 	}
 
 	public Board clone() {
 		Board clone = new Board();
-		clone.spots = this.spots.clone();
+		
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				if (spots[row][col].getPiece() != null)
+				clone.setSpot(row, col, spots[row][col].clone());
+			}
+		}
+
 		return clone;
 	}
 
-	public void resetBoard() {
+	public void setBoard() {
 		// initialize white pieces
 		spots[0][0] = new Spot(0, 0, new Rook(true));
 		spots[0][1] = new Spot(0, 1, new Knight(true));
@@ -66,8 +77,9 @@ public class Board {
 	}
 
 	public void printBoard(boolean lines) {
-		
-		if (lines) System.out.println();
+
+		if (lines)
+			System.out.println();
 		boolean hashtags = true;
 
 		for (int i = 7; i >= 0; i--) {
@@ -92,7 +104,8 @@ public class Board {
 			System.out.println();
 		}
 		System.out.println(" a  b  c  d  e  f  g  h");
-		if (lines) System.out.println();
+		if (lines)
+			System.out.println();
 
 		// System.out.println("Black king: " + getKingSpot(false));
 		// System.out.println("White king: " + getKingSpot(true));
@@ -126,7 +139,9 @@ public class Board {
 		return false;
 	}
 
-	public boolean isCheckmate(Boolean isWhite) {
+	public boolean isMovePossible(Boolean isWhite) {
+		//System.out.println("\nmovesPossible\n");
+		
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
 				// Spot (x,y)
@@ -135,12 +150,12 @@ public class Board {
 						// Spot (z, w)
 						if (getSpot(x, y).getPiece() != null) {
 							if (getSpot(x, y).getPiece().isWhite() == isWhite) {
-								
+
 								try {
 									tryMove(getSpot(x, y), getSpot(z, w), isWhite, false);
-									return false;
-								} catch (IllegalMoveException e) {								
-									
+									return true;
+								} catch (IllegalMoveException e) {
+
 								}
 							}
 						}
@@ -148,7 +163,8 @@ public class Board {
 				}
 			}
 		}
-		return true;
+		//System.out.println("\nmovesPossible\n");
+		return false;
 	}
 
 	public void tryMove(Spot from, Spot to, boolean whiteTurn, boolean makeMove) {
@@ -165,7 +181,21 @@ public class Board {
 		}
 
 		else if (from.getPiece().canMove(this, from, to)) {
-			makeMove(from, to);
+			
+			Board temp = this.clone();
+			//temp.printBoard(true);
+
+			temp.makeMove(temp.getSpot(from.getRow(), from.getCol()), temp.getSpot(to.getRow(), to.getCol()));
+			//temp.printBoard(true);
+
+			if (temp.isInCheck(whiteTurn))
+				throw new IllegalMoveException("Illegal move, try again");
+			
+			else if (makeMove){
+				System.out.println("Making move");
+				makeMove(from, to);
+			}
+				
 		}
 
 		else {
@@ -174,20 +204,10 @@ public class Board {
 
 	}
 
-	public void makeMove(Spot from, Spot to) {
-
-		System.out.println("Making move");
+	public void makeMove(Spot from, Spot to) {		
 		to.setPiece(from.getPiece());
 		from.setPiece(null);
-//
-//		if (isInCheck(whiteTurn)) {
-//			whiteTurn = !whiteTurn;
-//			System.out.println("Checkmate");
-//			this.gameFinished = true;
-//		}
-//
-//		this.whiteTurn = !this.whiteTurn;
-
 	}
+	
 
 }

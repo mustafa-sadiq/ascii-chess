@@ -34,7 +34,7 @@ public class Bishop extends Piece {
 		for(int row = from.getRow() + rowOffset; row != to.getRow(); row += rowOffset){
 			
 			if(board.getSpot(row, col).getPiece() != null){
-				System.out.println("Can not jump over piece.");
+				//System.out.println("Can not jump over piece.");
 				return false;
 			}
 			

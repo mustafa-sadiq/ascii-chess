@@ -21,16 +21,22 @@ public class ChessGame {
 
 	public void play() {
 		Scanner scanner = new Scanner(System.in);
-		String x = "abcdefgh";
+
 		board.printBoard(false);
 		System.out.println();
+
 		while (!gameFinished) {
-			if (board.isCheckmate(whiteTurn)) {
-				System.out.println("Checkmate");
-				gameFinished = true;
-			}
 			if (board.isInCheck(whiteTurn))
 				System.out.println("Check");
+			
+			System.out.println(board.isMovePossible(whiteTurn));
+			
+			if (!board.isMovePossible(whiteTurn)) {
+				System.out.println("Checkmate");
+				gameFinished = true;
+				end();
+			} 
+
 
 			if (whiteTurn) {
 				System.out.print("White's move: ");
@@ -42,16 +48,18 @@ public class ChessGame {
 
 			if (input.equals("draw")) {
 				gameFinished = true;
-			} else {
+				end();
+			}
 
-				int fromCol = x.indexOf(input.charAt(0));
-				int fromRow = input.charAt(1) - '0' - 1;
+			else if (input.equals("resign")) {
+				gameFinished = true;
+				end();
+			}
 
-				int toCol = x.indexOf(input.charAt(3));
-				int toRow = input.charAt(4) - '0' - 1;
-
-				Spot spotFrom = board.getSpot(fromRow, fromCol);
-				Spot spotTo = board.getSpot(toRow, toCol);
+			else {
+				Spot[] spots = readSpots(input);
+				Spot spotFrom = spots[0];
+				Spot spotTo = spots[1];
 
 				System.out.println("Trying moving from: " + spotFrom.toString());
 				System.out.println("Trying moving to: " + spotTo.toString());
@@ -64,24 +72,46 @@ public class ChessGame {
 						System.out.println("Checkmate");
 						this.gameFinished = true;
 					}
-					
+
 					whiteTurn = !whiteTurn;
 				} catch (IllegalMoveException e) {
 
 				}
 
 			}
-
+			
+			
 		}
 
-		if (whiteTurn && !gamedraw) {
-			System.out.println("Black wins");
-		} else if (!gamedraw)
-			System.out.println("White wins");
-		else
+		
+		scanner.close();
+	}
+
+	public void end() {
+		if (gamedraw)
 			System.out.println("Draw");
 
-		scanner.close();
+		else if (whiteTurn) {
+			System.out.println("Black wins");
+		} else
+			System.out.println("White wins");
+	}
+
+	public Spot[] readSpots(String input) {
+		String x = "abcdefgh";
+
+		int fromCol = x.indexOf(input.charAt(0));
+		int fromRow = input.charAt(1) - '0' - 1;
+
+		int toCol = x.indexOf(input.charAt(3));
+		int toRow = input.charAt(4) - '0' - 1;
+
+		Spot spotFrom = board.getSpot(fromRow, fromCol);
+		Spot spotTo = board.getSpot(toRow, toCol);
+
+		Spot[] retValue = { spotFrom, spotTo };
+		return retValue;
+
 	}
 
 }
