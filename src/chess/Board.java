@@ -7,22 +7,22 @@ public class Board {
 		spots = new Spot[8][8];
 		setBoard();
 	}
-	
+
 	public Spot getSpot(int row, int col) {
 		return spots[row][col];
 	}
-	
-	public Board (Spot[][] value) {
+
+	public Board(Spot[][] value) {
 		this.spots = value;
 	}
-	
+
 	private void setSpot(int row, int col, Spot spot) {
 		spots[row][col] = spot;
 	}
 
 	public Board clone() {
 		Board clone = new Board();
-		
+
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
 				clone.setSpot(row, col, spots[row][col].clone());
@@ -70,7 +70,7 @@ public class Board {
 		spots[6][5] = new Spot(6, 5, new Pawn(false));
 		spots[6][6] = new Spot(6, 6, new Pawn(false));
 		spots[6][7] = new Spot(6, 7, new Pawn(false));
-		
+
 //		for debugging 
 //		for (int i = 0; i < 8; i++) {		
 //			for (int j = 0; j < 8; j++) {
@@ -137,7 +137,7 @@ public class Board {
 
 	public boolean isInCheck(boolean isWhite) {
 		Spot kingPos = getKingSpot(isWhite);
-		//System.out.println(kingPos);
+		// System.out.println(kingPos);
 
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
@@ -153,8 +153,8 @@ public class Board {
 	}
 
 	public boolean isMovePossible(Boolean isWhite) {
-		//System.out.println("\nmovesPossible\n");
-		
+		// System.out.println("\nmovesPossible\n");
+
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
 				// Spot (x,y)
@@ -166,9 +166,9 @@ public class Board {
 
 								try {
 									tryMove(getSpot(x, y), getSpot(z, w), isWhite, false);
-									
-									//System.out.println(getSpot(x,y));
-									
+
+									// System.out.println(getSpot(x,y));
+
 									return true;
 								} catch (IllegalMoveException e) {
 
@@ -179,7 +179,7 @@ public class Board {
 				}
 			}
 		}
-		//System.out.println("\nmovesPossible\n");
+		// System.out.println("\nmovesPossible\n");
 		return false;
 	}
 
@@ -197,21 +197,21 @@ public class Board {
 		}
 
 		else if (from.getPiece().canMove(this, from, to)) {
-			
+
 			Board temp = this.clone();
-			//temp.printBoard(true);
+			// temp.printBoard(true);
 
 			temp.makeMove(temp.getSpot(from.getRow(), from.getCol()), temp.getSpot(to.getRow(), to.getCol()));
-			//temp.printBoard(true);
+			// temp.printBoard(true);
 
 			if (temp.isInCheck(whiteTurn))
 				throw new IllegalMoveException("Illegal move, try again");
-			
-			else if (makeMove){
-				//System.out.println("Making move");
+
+			else if (makeMove) {
+				// System.out.println("Making move");
 				makeMove(from, to);
 			}
-				
+
 		}
 
 		else {
@@ -220,10 +220,9 @@ public class Board {
 
 	}
 
-	public void makeMove(Spot from, Spot to) {		
+	public void makeMove(Spot from, Spot to) {
 		to.setPiece(from.getPiece());
 		from.setPiece(null);
 	}
-	
 
 }

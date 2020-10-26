@@ -26,7 +26,7 @@ public class Spot {
 	public int getCol() {
 		return this.col;
 	}
-	
+
 	public Spot clone() {
 		Spot clone = new Spot(row, col, this.getPiece());
 		return clone;

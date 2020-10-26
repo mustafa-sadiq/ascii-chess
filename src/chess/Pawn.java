@@ -1,7 +1,7 @@
 package chess;
 
 public class Pawn extends Piece {
-	
+
 	private boolean enpassant;
 
 	public Pawn(boolean white) {
@@ -26,11 +26,11 @@ public class Pawn extends Piece {
 		if (from.getCol() == to.getCol()) {
 			// Not taking a piece
 			if (from.getPiece().isWhite()) {
-				if (board.getSpot(from.getRow()+1, from.getCol()).getPiece() != null) {
+				if (board.getSpot(from.getRow() + 1, from.getCol()).getPiece() != null) {
 					return false;
 				}
 			} else {
-				if (board.getSpot(from.getRow()-1, from.getCol()).getPiece() != null) {
+				if (board.getSpot(from.getRow() - 1, from.getCol()).getPiece() != null) {
 					return false;
 				}
 			}
@@ -44,16 +44,14 @@ public class Pawn extends Piece {
 				}
 
 				if (from.getPiece().isWhite()) {
-					if (board.getSpot(from.getRow()+2, from.getCol()).getPiece() != null) {
+					if (board.getSpot(from.getRow() + 2, from.getCol()).getPiece() != null) {
 						return false;
 					}
 				} else {
-					if (board.getSpot(from.getRow()-2, from.getCol()).getPiece() != null) {
+					if (board.getSpot(from.getRow() - 2, from.getCol()).getPiece() != null) {
 						return false;
 					}
 				}
-
-				 
 
 			}
 		} else {

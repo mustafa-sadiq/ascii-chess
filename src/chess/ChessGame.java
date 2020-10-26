@@ -26,24 +26,20 @@ public class ChessGame {
 		System.out.println();
 
 		while (!gameFinished) {
-			
+
 			if (!board.isMovePossible(whiteTurn)) {
 				System.out.println("Checkmate");
 				gameFinished = true;
 				end();
 			}
-			
-			
 
-			//System.out.println(board.isMovePossible(whiteTurn));
-
-			
+			// System.out.println(board.isMovePossible(whiteTurn));
 
 			if (!gameFinished) {
-				
+
 				if (board.isInCheck(whiteTurn))
 					System.out.println("Check");
-				
+
 				if (whiteTurn) {
 					System.out.print("White's move: ");
 				} else {
@@ -67,8 +63,8 @@ public class ChessGame {
 					Spot spotFrom = spots[0];
 					Spot spotTo = spots[1];
 
-					//System.out.println("Trying moving from: " + spotFrom.toString());
-					//System.out.println("Trying moving to: " + spotTo.toString());
+					// System.out.println("Trying moving from: " + spotFrom.toString());
+					// System.out.println("Trying moving to: " + spotTo.toString());
 
 					try {
 						board.tryMove(spotFrom, spotTo, whiteTurn, true);

@@ -14,33 +14,33 @@ public class Bishop extends Piece {
 			return false;
 		} else if (Math.abs(from.getRow() - to.getRow()) != Math.abs(from.getCol() - to.getCol())) {
 			return false;
-		} 
-		
+		}
+
 		int rowOffset, colOffset;
-		
-		if(from.getRow() < to.getRow()){
+
+		if (from.getRow() < to.getRow()) {
 			rowOffset = 1;
-		}else{
+		} else {
 			rowOffset = -1;
 		}
-		
-		if(from.getCol() < to.getCol()){
+
+		if (from.getCol() < to.getCol()) {
 			colOffset = 1;
-		}else{
+		} else {
 			colOffset = -1;
 		}
-		
+
 		int col = from.getCol() + colOffset;
-		for(int row = from.getRow() + rowOffset; row != to.getRow(); row += rowOffset){
-			
-			if(board.getSpot(row, col).getPiece() != null){
-				//System.out.println("Can not jump over piece.");
+		for (int row = from.getRow() + rowOffset; row != to.getRow(); row += rowOffset) {
+
+			if (board.getSpot(row, col).getPiece() != null) {
+				// System.out.println("Can not jump over piece.");
 				return false;
 			}
-			
+
 			col += colOffset;
 		}
-			return true;
+		return true;
 	}
 
 	@Override

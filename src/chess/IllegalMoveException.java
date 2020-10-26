@@ -15,7 +15,7 @@ public class IllegalMoveException extends RuntimeException {
 		// TODO Auto-generated constructor stub
 		super();
 		//System.out.println(value);
-		//System.out.println("Illegal move, try again");
+		// System.out.println("Illegal move, try again");
 	}
 
 }
