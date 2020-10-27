@@ -1,11 +1,10 @@
 package chess;
 
 public class King extends Piece {
-	public boolean castled;
 
 	public King(boolean white) {
 		super(white);
-		castled = false;
+		//castled = false;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -21,7 +20,7 @@ public class King extends Piece {
 
 				if (board.getSpot(to.getRow(), from.getCol() + 1).getPiece() != null
 						|| board.getSpot(to.getRow(), from.getCol() + 2).getPiece() != null) {
-					castled = false;
+					//castled = false;
 					return false;
 				}
 
@@ -29,16 +28,16 @@ public class King extends Piece {
 				if (board.getSpot(to.getRow(), from.getCol() - 1).getPiece() != null
 						|| board.getSpot(to.getRow(), from.getCol() - 2).getPiece() != null
 						|| board.getSpot(to.getRow(), from.getCol() - 3).getPiece() != null) {
-					castled = false;
+					//castled = false;
 					return false;
 				}
 
 			} else {
-				castled = false;
+				//castled = false;
 				return false;
 			}
 
-			castled = true;
+			//castled = true;
 
 		}
 

@@ -206,11 +206,14 @@ public class Board {
 
 			if (temp.isInCheck(whiteTurn))
 				throw new IllegalMoveException("Illegal move, try again");
+			
+			
+			
 
 			else if (makeMove) {
 				// System.out.println("Making move");
 				makeMove(from, to);
-			}
+			} 
 
 		}
 
