@@ -221,6 +221,7 @@ public class Board {
 	}
 
 	public void makeMove(Spot from, Spot to) {
+		from.getPiece().setHasMoved(true);
 		to.setPiece(from.getPiece());
 		from.setPiece(null);
 	}
