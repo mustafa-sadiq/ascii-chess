@@ -37,7 +37,7 @@ public class King extends Piece {
 				castled = false;
 				return false;
 			}
-
+			System.out.println("Castled");
 			castled = true;
 
 		}
