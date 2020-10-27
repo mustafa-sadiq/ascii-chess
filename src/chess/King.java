@@ -4,6 +4,14 @@ public class King extends Piece {
 
 	private boolean castled;
 	
+	public boolean isCastled() {
+		return castled;
+	}
+	
+	public void notCastled() {
+		castled = false;
+	}
+	
 	public King(boolean white) {
 		super(white);
 		castled = false;
