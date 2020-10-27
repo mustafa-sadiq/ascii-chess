@@ -24,7 +24,7 @@ public class King extends Piece {
 					return false;
 				}
 
-			} else if (from.getCol() - to.getCol() == 3 && from.getRow() == to.getRow()) {
+			} else if (from.getCol() - to.getCol() == 2 && from.getRow() == to.getRow()) {
 				if (board.getSpot(to.getRow(), from.getCol() - 1).getPiece() != null
 						|| board.getSpot(to.getRow(), from.getCol() - 2).getPiece() != null
 						|| board.getSpot(to.getRow(), from.getCol() - 3).getPiece() != null) {
