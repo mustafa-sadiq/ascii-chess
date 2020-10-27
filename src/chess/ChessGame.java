@@ -6,7 +6,6 @@ public class ChessGame {
 	private Board board;
 	private boolean whiteTurn;
 	private boolean gameFinished;
-	private boolean gamedraw;
 
 	public boolean getWhiteTurn() {
 		return this.whiteTurn;
@@ -16,7 +15,6 @@ public class ChessGame {
 		whiteTurn = true;
 		gameFinished = false;
 		board = new Board();
-		gamedraw = false;
 	}
 
 	public void play() {
@@ -27,18 +25,18 @@ public class ChessGame {
 
 		while (!gameFinished) {
 
-			if (!board.isMovePossible(whiteTurn)) {
-				if (!board.isMovePossible(!whiteTurn)) {
-					gameFinished = true;
-					gamedraw = true;
-					end();
-				} else {
+			try {
+				if (!board.isMovePossible(whiteTurn)) {				
 					System.out.println("Checkmate");
 					gameFinished = true;
-					end();
-				}
+					end();			
 			}
-
+			} catch (NullPointerException e) {
+				System.out.println("Draw");
+				gameFinished = true;
+			}
+			
+			
 			// System.out.println(board.isMovePossible(whiteTurn));
 
 			if (!gameFinished) {
@@ -122,10 +120,7 @@ public class ChessGame {
 	}
 
 	public void end() {
-		if (gamedraw)
-			System.out.println("Draw");
-
-		else if (whiteTurn) {
+		if (whiteTurn) {
 			System.out.println("Black wins");
 		} else
 			System.out.println("White wins");

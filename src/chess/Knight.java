@@ -10,15 +10,10 @@ public class Knight extends Piece {
 	@Override
 	public boolean canMove(Board board, Spot from, Spot to) {
 
-		if (Math.abs(from.getRow() - to.getRow()) == 2 && Math.abs(from.getCol() - to.getCol()) == 1) {
-			return true;
-		}
-
-		if (Math.abs(from.getRow() - to.getRow()) == 1 && Math.abs(from.getCol() - to.getCol()) == 2) {
-			return true;
-		}
-
-		return false;
+		int row = Math.abs(from.getRow() - to.getRow()); 
+        int col = Math.abs(from.getCol() - to.getCol()); 
+                
+        return row * col == 2; 
 	}
 
 	@Override

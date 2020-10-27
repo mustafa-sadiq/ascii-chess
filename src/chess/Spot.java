@@ -35,6 +35,7 @@ public class Spot {
 		else if (this.piece instanceof Pawn) {
 			Pawn clone = new Pawn(this.piece.isWhite());
 			clone.setEnpassant(((Pawn) this.getPiece()).getEnpassant());
+			clone.setJustdoublemove(((Pawn) this.getPiece()).getJustdoublemove());
 			return new Spot(row, col, clone);
 		}
 		else if  (this.piece instanceof King){
