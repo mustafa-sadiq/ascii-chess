@@ -34,14 +34,16 @@ public class Board {
 
 	public void setBoard() {
 		// initialize white pieces
-		spots[0][0] = new Spot(0, 0, new Rook(true));
+//		spots[0][0] = new Spot(0, 0, new Rook(true));
 //		spots[0][1] = new Spot(0, 1, new Knight(true));
 //		spots[0][2] = new Spot(0, 2, new Bishop(true));
 //		spots[0][3] = new Spot(0, 3, new Queen(true));
 		spots[0][4] = new Spot(0, 4, new King(true));
 //		spots[0][5] = new Spot(0, 5, new Bishop(true));
 //		spots[0][6] = new Spot(0, 6, new Knight(true));
-		spots[0][7] = new Spot(0, 7, new Rook(true));
+//		spots[0][7] = new Spot(0, 7, new Rook(true));
+		
+		spots[4][1] =  new Spot(4, 1, new Queen(true));
 
 //		spots[1][0] = new Spot(1, 0, new Pawn(true));
 //		spots[1][1] = new Spot(1, 1, new Pawn(true));
@@ -221,6 +223,7 @@ public class Board {
 	}
 
 	public void makeMove(Spot from, Spot to) {
+		from.getPiece().setHasMoved(true);
 		to.setPiece(from.getPiece());
 		from.setPiece(null);
 	}
