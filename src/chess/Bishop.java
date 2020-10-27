@@ -42,6 +42,8 @@ public class Bishop extends Piece {
 		}
 		return true;
 	}
+	
+
 
 	@Override
 	public String toString() {

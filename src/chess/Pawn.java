@@ -3,6 +3,14 @@ package chess;
 public class Pawn extends Piece {
 
 	private boolean enpassant;
+	
+	public boolean getEnpassant() {
+		return enpassant;
+	}
+	
+	public void setEnpassant(boolean value) {
+		enpassant = value;
+	}
 
 	public Pawn(boolean white) {
 		super(white);
@@ -68,6 +76,7 @@ public class Pawn extends Piece {
 		return true;
 
 	}
+
 
 	@Override
 	public String toString() {

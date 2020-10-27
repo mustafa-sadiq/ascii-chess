@@ -42,6 +42,7 @@ public class Board {
 		spots[0][5] = new Spot(0, 5, new Bishop(true));
 		spots[0][6] = new Spot(0, 6, new Knight(true));
 		spots[0][7] = new Spot(0, 7, new Rook(true));
+		
 
 		spots[1][0] = new Spot(1, 0, new Pawn(true));
 		spots[1][1] = new Spot(1, 1, new Pawn(true));
@@ -185,7 +186,7 @@ public class Board {
 
 	public void tryMove(Spot from, Spot to, boolean whiteTurn, boolean makeMove) {
 		if (from.getPiece() == null) {
-			throw new IllegalMoveException("No piece to move! Try again");
+			throw new IllegalMoveException("No piece to move! Try again!");
 		}
 
 		else if (whiteTurn != from.getPiece().isWhite()) {
@@ -197,23 +198,61 @@ public class Board {
 		}
 
 		else if (from.getPiece().canMove(this, from, to)) {
+						
+			if (from.getPiece() instanceof King && ((King) from.getPiece()).getCastled()) {
+				if (isInCheck(whiteTurn)) { 
+					throw new IllegalMoveException("King cannot castle if in check");				
+				}
+				
+				if (to.getCol() > from.getCol()) {
+					Board temp = this.clone();
+					// temp.printBoard(true);			
+					temp.makeMove(temp.getSpot(from.getRow(), from.getCol()), temp.getSpot(to.getRow(), to.getCol()-1));
+					// temp.printBoard(true);
+					if (temp.isInCheck(whiteTurn)) 
+						throw new IllegalMoveException("King will be in check in between");
+					
+
+				} else if (to.getCol() < from.getCol()) {
+					Board temp = this.clone();
+					// temp.printBoard(true);			
+					temp.makeMove(temp.getSpot(from.getRow(), from.getCol()), temp.getSpot(to.getRow(), to.getCol()+1));
+					// temp.printBoard(true);
+					if (temp.isInCheck(whiteTurn)) 
+						throw new IllegalMoveException("King will be in check in between");
+				}
+
+				
+				
+				
+			}
 
 			Board temp = this.clone();
-			// temp.printBoard(true);
-
+			// temp.printBoard(true);			
 			temp.makeMove(temp.getSpot(from.getRow(), from.getCol()), temp.getSpot(to.getRow(), to.getCol()));
 			// temp.printBoard(true);
 
-			if (temp.isInCheck(whiteTurn))
-				throw new IllegalMoveException("Illegal move, try again");
+			if (temp.isInCheck(whiteTurn)) 
+				throw new IllegalMoveException("King will be in check");
+			
+			
+	
 			
 			
 			
 
-			else if (makeMove) {
+			if (makeMove) {
 				// System.out.println("Making move");
 				makeMove(from, to);
-			} 
+			} else {
+				if (from.getPiece() instanceof King) {
+					((King) from.getPiece()).setCastled(false);
+				} 
+				
+				if (from.getPiece() instanceof Pawn) {
+					((Pawn) from.getPiece()).setEnpassant(false);
+				}
+			}
 
 		}
 

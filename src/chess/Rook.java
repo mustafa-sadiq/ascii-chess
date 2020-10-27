@@ -39,6 +39,7 @@ public class Rook extends Piece {
 		return true;
 	}
 
+	
 	@Override
 	public String toString() {
 		if (this.isWhite())

@@ -21,5 +21,7 @@ public class Queen extends Piece {
 		else
 			return "bQ";
 	}
+	
+
 
 }

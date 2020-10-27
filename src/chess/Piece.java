@@ -17,9 +17,9 @@ public abstract class Piece {
 		return this.moved;
 	}
 
-	public void setHasMoved(boolean moved) {
-		this.moved = moved;
+	public void setHasMoved(boolean value) {
+		this.moved = value;
 	}
-
+	
 	public abstract boolean canMove(Board board, Spot from, Spot to);
 }

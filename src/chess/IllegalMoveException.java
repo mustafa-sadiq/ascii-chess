@@ -16,6 +16,8 @@ public class IllegalMoveException extends RuntimeException {
 		super();
 		//System.out.println(value);
 		// System.out.println("Illegal move, try again");
+		
+		if (value.contains(" print")) System.out.println(value);
 	}
 
 }

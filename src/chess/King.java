@@ -3,15 +3,15 @@ package chess;
 public class King extends Piece {
 
 	private boolean castled;
-	
-	public boolean isCastled() {
+
+	public boolean getCastled() {
 		return castled;
 	}
-	
-	public void notCastled() {
-		castled = false;
+
+	public void setCastled(boolean value) {
+		castled = value;
 	}
-	
+
 	public King(boolean white) {
 		super(white);
 		castled = false;
@@ -25,7 +25,6 @@ public class King extends Piece {
 			if (from.getPiece().hasMoved()) {
 				return false;
 			}
-
 			if (to.getCol() - from.getCol() == 2 && from.getRow() == to.getRow()) {
 
 				if (board.getSpot(to.getRow(), from.getCol() + 1).getPiece() != null
@@ -53,6 +52,7 @@ public class King extends Piece {
 
 		return true;
 	}
+
 
 	@Override
 	public String toString() {
