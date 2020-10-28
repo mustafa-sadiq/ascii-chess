@@ -245,19 +245,19 @@ public class Board {
 				if (from.getPiece() instanceof King && ((King) from.getPiece()).getCastled()) {
 					if (to.getCol() - from.getCol() == 2) {
 						if (to.getRow() == 0) {
-							getSpot(0, 5).setPiece(getSpot(0,7).getPiece());
+							getSpot(0, 5).setPiece(getSpot(0, 7).getPiece());
 							getSpot(0, 7).setPiece(null);
 						} else if (to.getRow() == 7) {
-							getSpot(7, 5).setPiece(getSpot(7,7).getPiece());
+							getSpot(7, 5).setPiece(getSpot(7, 7).getPiece());
 							getSpot(7, 7).setPiece(null);
 						}
 
 					} else if (from.getCol() - to.getCol() == 2) {
 						if (to.getRow() == 0) {
-							getSpot(0, 3).setPiece(getSpot(0,3).getPiece());
+							getSpot(0, 3).setPiece(getSpot(0, 3).getPiece());
 							getSpot(0, 0).setPiece(null);
 						} else if (to.getRow() == 7) {
-							getSpot(7, 3).setPiece(getSpot(7,3).getPiece());
+							getSpot(7, 3).setPiece(getSpot(7, 3).getPiece());
 							getSpot(7, 0).setPiece(null);
 						}
 					}
