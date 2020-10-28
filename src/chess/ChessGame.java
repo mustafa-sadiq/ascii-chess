@@ -2,21 +2,47 @@ package chess;
 
 import java.util.Scanner;
 
+/**
+ * ChessGame class which stores board and turn and plays according to input
+ * 
+ * @author Mustafa Sadiq (ms3035)
+ * @author Robert Mannifield (rmm288)
+ *
+ */
 public class ChessGame {
+	/**
+	 * contains a Board for the game
+	 */
 	private Board board;
+	/**
+	 * is it white turn or not
+	 */
 	private boolean whiteTurn;
+	/**
+	 * is the game finished or not
+	 */
 	private boolean gameFinished;
 
+	/**
+	 * Return if white turn or not
+	 * @return White turn
+	 */
 	public boolean getWhiteTurn() {
 		return this.whiteTurn;
 	}
 
+	/**
+	 * Constructor to create a new game with new board starting with white turn
+	 */
 	public ChessGame() {
 		whiteTurn = true;
 		gameFinished = false;
 		board = new Board();
 	}
 
+	/**
+	 * Play method which reads user input and changes board accordingly
+	 */
 	public void play() {
 		Scanner scanner = new Scanner(System.in);
 
@@ -126,6 +152,9 @@ public class ChessGame {
 		scanner.close();
 	}
 
+	/**
+	 * Prints which player won at end of game
+	 */
 	public void end() {
 		if (whiteTurn) {
 			System.out.println("Black wins");
@@ -133,6 +162,12 @@ public class ChessGame {
 			System.out.println("White wins");
 	}
 
+	/**
+	 * A method which reads input and returns spots
+	 * 
+	 * @param Input from Scanner
+	 * @return Two spots (from and to)
+	 */
 	public Spot[] readSpots(String input) {
 		String x = "abcdefgh";
 

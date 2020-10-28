@@ -1,25 +1,57 @@
 package chess;
 
+/**
+ * Board class containing spots and logic
+ * 
+ * @author Mustafa Sadiq (ms3035)
+ * @author Robert Mannifield (rmm288)
+ *
+ */
 public class Board {
+	/**
+	 * Spots field
+	 */
 	Spot[][] spots;
 
+	/**
+	 * Constructor for Board creating a new board with default spots
+	 */
 	public Board() {
 		spots = new Spot[8][8];
 		setBoard();
 	}
 
+	/**
+	 * @param row
+	 * @param col
+	 * @return Spot at row col
+	 */
 	public Spot getSpot(int row, int col) {
 		return spots[row][col];
 	}
 
+	/**
+	 * Constructor for Board creating a Board from given spot array
+	 * @param Spot array from another board
+	 */
 	public Board(Spot[][] value) {
 		this.spots = value;
 	}
 
+	/**
+	 * setter for Spot at row col
+	 * 
+	 * @param row
+	 * @param col
+	 * @param spot
+	 */
 	private void setSpot(int row, int col, Spot spot) {
 		spots[row][col] = spot;
 	}
 
+	/**
+	 * Clones the board
+	 */
 	public Board clone() {
 		Board clone = new Board();
 
@@ -32,6 +64,9 @@ public class Board {
 		return clone;
 	}
 
+	/**
+	 * Sets the board to default setting
+	 */
 	public void setBoard() {
 		// initialize white pieces
 		spots[0][0] = new Spot(0, 0, new Rook(true));
@@ -90,6 +125,10 @@ public class Board {
 
 	}
 
+	/**
+	 * Print the board
+	 * @param boolean to if print lines before and after
+	 */
 	public void printBoard(boolean lines) {
 
 		if (lines)
@@ -125,6 +164,11 @@ public class Board {
 		// System.out.println("White king: " + getKingSpot(true));
 	}
 
+	/**
+	 * getter for King spot
+	 * @param white or black boolean
+	 * @return Spot of King (white or black)
+	 */
 	public Spot getKingSpot(boolean isWhite) {
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
@@ -136,6 +180,11 @@ public class Board {
 		return new Spot(0, 0, null);
 	}
 
+	/**
+	 * is white or black in check
+	 * @param white or black boolean
+	 * @return boolean yes or no
+	 */
 	public boolean isInCheck(boolean isWhite) {
 		Spot kingPos = getKingSpot(isWhite);
 		// System.out.println(kingPos);
@@ -153,6 +202,11 @@ public class Board {
 		return false;
 	}
 
+	/**
+	 * are any moves possible for given color
+	 * @param white or black boolean
+	 * @return boolean yes or no
+	 */
 	public boolean isMovePossible(Boolean isWhite) {
 		// System.out.println("\nmovesPossible\n");
 
@@ -187,6 +241,13 @@ public class Board {
 		return false;
 	}
 
+	/**
+	 * try moving spotFrom to spotTo and only make move if makeMove is true
+	 * @param Spot from
+	 * @param Spot to
+	 * @param is whiteTurn?
+	 * @param makeMove?
+	 */
 	public void tryMove(Spot from, Spot to, boolean whiteTurn, boolean makeMove) {
 
 		if (from.getPiece() == null) {
@@ -290,6 +351,11 @@ public class Board {
 
 	}
 
+	/**
+	 * Makes the move and resets Pawn and King
+	 * @param move from spot
+	 * @param move to spot
+	 */
 	public void makeMove(Spot from, Spot to) {
 		if (from.getPiece() instanceof Pawn && Math.abs(to.getRow() - from.getRow()) == 2) {
 			((Pawn) from.getPiece()).setJustdoublemove(true);

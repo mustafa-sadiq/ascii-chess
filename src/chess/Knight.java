@@ -1,12 +1,25 @@
 package chess;
 
+/**
+ * Knight class 
+ * 
+ * @author Mustafa Sadiq (ms3035)
+ * @author Robert Mannifield (rmm288)
+ *
+ */
 public class Knight extends Piece {
 
+	/**
+	 * Constructor for Knight (black or white)
+	 * @param white
+	 */
 	public Knight(boolean white) {
 		super(white);
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public boolean canMove(Board board, Spot from, Spot to) {
 
@@ -16,6 +29,9 @@ public class Knight extends Piece {
 		return row * col == 2;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public String toString() {
 		if (this.isWhite())

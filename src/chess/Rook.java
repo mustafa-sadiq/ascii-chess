@@ -1,12 +1,27 @@
 package chess;
 
+/**
+ * 
+ * Rook class
+ * 
+ * @author Mustafa Sadiq (ms3035)
+ * @author Robert Mannifield (rmm288)
+ *
+ */
 public class Rook extends Piece {
 
+	/**
+	 * Constructor for Rook (black or white)
+	 * @param white
+	 */
 	public Rook(boolean white) {
 		super(white);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public boolean canMove(Board board, Spot from, Spot to) {
 		// TODO Auto-generated method stub
@@ -39,6 +54,9 @@ public class Rook extends Piece {
 		return true;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public String toString() {
 		if (this.isWhite())

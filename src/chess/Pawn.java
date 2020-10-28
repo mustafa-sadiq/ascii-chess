@@ -1,26 +1,59 @@
 package chess;
 
+/**
+ * Pawn class
+ * 
+ * @author Mustafa Sadiq (ms3035)
+ * @author Robert Mannifield (rmm288)
+ *
+ */
 public class Pawn extends Piece {
 
+	/**
+	 * is current move piece the capturing en passant
+	 */
 	private boolean enpassant;
+	/**
+	 * is piece last move and double
+	 */
 	private boolean justdoublemove;
 
+	/**
+	 * getter for justdoublemove
+	 * @return justdoublemove
+	 */
 	public boolean getJustdoublemove() {
 		return justdoublemove;
 	}
 
+	/**
+	 * setter for justdoublemove
+	 * @param boolean justdoublemove
+	 */
 	public void setJustdoublemove(boolean justdoublemove) {
 		this.justdoublemove = justdoublemove;
 	}
 
+	/**
+	 * getter for enpassant
+	 * @return enpassant
+	 */
 	public boolean getEnpassant() {
 		return enpassant;
 	}
 
+	/**
+	 * setter for enpassant
+	 * @param boolean enpassant
+	 */
 	public void setEnpassant(boolean value) {
 		enpassant = value;
 	}
 
+	/**
+	 * Constructor for Pawn creating a white or black pawn
+	 * @param white
+	 */
 	public Pawn(boolean white) {
 		super(white);
 		enpassant = false;
@@ -28,6 +61,9 @@ public class Pawn extends Piece {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public boolean canMove(Board board, Spot from, Spot to) {
 
@@ -113,6 +149,9 @@ public class Pawn extends Piece {
 		return true;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public String toString() {
 		if (this.isWhite())
