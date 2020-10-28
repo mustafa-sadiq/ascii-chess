@@ -83,22 +83,34 @@ public class Pawn extends Piece {
 			}
 
 			if (board.getSpot(to.getRow(), to.getCol()).getPiece() == null) {
-				
-				if ((from.getPiece().isWhite() && from.getRow() == 4) || (!from.getPiece().isWhite() && from.getRow() == 3)) {
-					if (to.getCol() + 1 < 8) {
-						if (board.getSpot(to.getRow(), to.getCol() + 1).getPiece() != null) {
-							if (board.getSpot(to.getRow(), to.getCol() + 1).getPiece() instanceof Pawn
-									&& ((Pawn) board.getSpot(to.getRow(), to.getCol() + 1).getPiece()).justdoublemove) {
+
+				if ((from.getPiece().isWhite() && from.getRow() == 4)
+						|| (!from.getPiece().isWhite() && from.getRow() == 3)) {
+
+					System.out.println("5th rank");
+
+					if (from.getCol() + 1 < 8) {
+						if (board.getSpot(from.getRow(), to.getCol() + 1).getPiece() != null
+								&& board.getSpot(from.getRow(), to.getCol() + 1).getPiece().isWhite() != from.getPiece()
+										.isWhite()) {
+							System.out.println("enemy pawn on right");
+							if (board.getSpot(from.getRow(), to.getCol() + 1).getPiece() instanceof Pawn
+									&& ((Pawn) board.getSpot(from.getRow(), to.getCol() + 1)
+											.getPiece()).justdoublemove) {
 								System.out.println("Enpassant true");
 								enpassant = true;
 							}
 						}
 					}
 
-					else if (to.getCol() - 1 > 0) {
-						if (board.getSpot(to.getRow(), to.getCol() - 1).getPiece() != null) {
-							if (board.getSpot(to.getRow(), to.getCol() - 1).getPiece() instanceof Pawn
-									&& ((Pawn) board.getSpot(to.getRow(), to.getCol() - 1).getPiece()).justdoublemove) {
+					if (from.getCol() - 1 > 0) {
+						if (board.getSpot(from.getRow(), to.getCol() - 1).getPiece() != null
+								&& board.getSpot(from.getRow(), to.getCol() + 1).getPiece().isWhite() != from.getPiece()
+										.isWhite()) {
+							System.out.println("enemy pawn on left");
+							if (board.getSpot(from.getRow(), to.getCol() - 1).getPiece() instanceof Pawn
+									&& ((Pawn) board.getSpot(from.getRow(), to.getCol() - 1)
+											.getPiece()).justdoublemove) {
 								System.out.println("Enpassant true");
 								enpassant = true;
 							}
@@ -108,9 +120,9 @@ public class Pawn extends Piece {
 				}
 
 				System.out.println(enpassant);
-				if (!enpassant) return false;
-				
-				
+				if (!enpassant)
+					return false;
+
 			}
 
 		}

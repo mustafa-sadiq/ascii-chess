@@ -38,7 +38,7 @@ public class Board {
 //		spots[0][1] = new Spot(0, 1, new Knight(true));
 //		spots[0][2] = new Spot(0, 2, new Bishop(true));
 //		spots[0][3] = new Spot(0, 3, new Queen(true));
-//		spots[0][4] = new Spot(0, 4, new King(true));
+		spots[0][4] = new Spot(0, 4, new King(true));
 //		spots[0][5] = new Spot(0, 5, new Bishop(true));
 //		spots[0][6] = new Spot(0, 6, new Knight(true));
 //		spots[0][7] = new Spot(0, 7, new Rook(true));
@@ -57,7 +57,7 @@ public class Board {
 //		spots[7][1] = new Spot(7, 1, new Knight(false));
 //		spots[7][2] = new Spot(7, 2, new Bishop(false));
 //		spots[7][3] = new Spot(7, 3, new Queen(false));
-//		spots[7][4] = new Spot(7, 4, new King(false));
+		spots[7][4] = new Spot(7, 4, new King(false));
 //		spots[7][5] = new Spot(7, 5, new Bishop(false));
 //		spots[7][6] = new Spot(7, 6, new Knight(false));
 //		spots[7][7] = new Spot(7, 7, new Rook(false));
@@ -71,20 +71,20 @@ public class Board {
 //		spots[6][6] = new Spot(6, 6, new Pawn(false));
 //		spots[6][7] = new Spot(6, 7, new Pawn(false));
 
-		
 		spots[1][0] = new Spot(1, 0, new Pawn(true));
 		spots[1][1] = new Spot(1, 1, new Pawn(true));
 		spots[4][0] = new Spot(4, 0, new Pawn(false));
+		((Pawn) spots[4][0].getPiece()).setHasMoved(true);
 		spots[3][1] = new Spot(3, 1, new Pawn(false));
-		
-		
+		((Pawn) spots[3][1].getPiece()).setHasMoved(true);
+
 //		for debugging 
-		for (int i = 0; i < 8; i++) {		
+		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (spots[i][j] == null) {
 					spots[i][j] = new Spot(i, j, null);
 				}
-				
+
 			}
 		}
 
@@ -94,6 +94,7 @@ public class Board {
 //				spots[i][j] = new Spot(i, j, null);
 //			}
 //		}
+
 	}
 
 	public void printBoard(boolean lines) {
@@ -242,28 +243,15 @@ public class Board {
 				// System.out.println("Making move");
 
 				if (from.getPiece() instanceof Pawn && ((Pawn) from.getPiece()).getEnpassant()) {
-					System.out.println("enpassanting white");
-					if (to.getCol() + 1 < 8) {
-						getSpot(to.getRow(), to.getCol() + 1).setPiece(null);
-					} else if (to.getCol() - 1 > 0) {
-						getSpot(to.getRow(), to.getCol() - 1).setPiece(null);
-					}
-
-				}
-
-				if (from.getPiece() instanceof Pawn && ((Pawn) from.getPiece()).getEnpassant()) {
-					System.out.println("enpassanting black");
-					if (to.getCol() + 1 < 8) {
-						getSpot(to.getRow(), to.getCol() + 1).setPiece(null);
-					} else if (to.getCol() - 1 > 0) {
-						getSpot(to.getRow(), to.getCol() - 1).setPiece(null);
-					}
+					getSpot(from.getRow(), to.getCol()).setPiece(null);
 				}
 
 				makeMove(from, to);
 			}
 
-			else {
+			else
+
+			{
 				if (from.getPiece() instanceof King) {
 					((King) from.getPiece()).setCastled(false);
 				}
@@ -277,7 +265,9 @@ public class Board {
 
 		}
 
-		else {
+		else
+
+		{
 			throw new IllegalMoveException("Illegal move, try again ");
 		}
 
@@ -290,8 +280,9 @@ public class Board {
 
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				if (spots[i][j].getPiece() != null && spots[i][j].getPiece().isWhite() != from.getPiece().isWhite()) {
-					if (spots[i][j].getPiece() instanceof Pawn) {
+				if (spots[i][j].getPiece() != null) {
+					if (spots[i][j].getPiece() instanceof Pawn
+							&& spots[i][j].getPiece().isWhite() != from.getPiece().isWhite()) {
 						((Pawn) spots[i][j].getPiece()).setJustdoublemove(false);
 					}
 				}
