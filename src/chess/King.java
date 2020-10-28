@@ -53,7 +53,6 @@ public class King extends Piece {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		if (this.isWhite())

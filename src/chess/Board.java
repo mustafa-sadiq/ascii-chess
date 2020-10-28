@@ -71,7 +71,6 @@ public class Board {
 		spots[6][6] = new Spot(6, 6, new Pawn(false));
 		spots[6][7] = new Spot(6, 7, new Pawn(false));
 
-
 //		for debugging 
 //		for (int i = 0; i < 8; i++) {
 //			for (int j = 0; j < 8; j++) {

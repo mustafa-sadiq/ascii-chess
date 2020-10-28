@@ -26,17 +26,16 @@ public class ChessGame {
 		while (!gameFinished) {
 
 			try {
-				if (!board.isMovePossible(whiteTurn)) {				
+				if (!board.isMovePossible(whiteTurn)) {
 					System.out.println("Checkmate");
 					gameFinished = true;
-					end();			
-			}
+					end();
+				}
 			} catch (NullPointerException e) {
 				System.out.println("Draw");
 				gameFinished = true;
 			}
-			
-			
+
 			// System.out.println(board.isMovePossible(whiteTurn));
 
 			if (!gameFinished) {
@@ -79,10 +78,14 @@ public class ChessGame {
 								System.out.println("Promoting to queen");
 								spotTo.setPiece(new Queen(whiteTurn));
 							} else if (input.length() == 7) {
-								if (input.charAt(6) == 'B') spotTo.setPiece(new Bishop(whiteTurn));
-								if (input.charAt(6) == 'N') spotTo.setPiece(new Knight(whiteTurn));
-								if (input.charAt(6) == 'R') spotTo.setPiece(new Rook(whiteTurn));
-								if (input.charAt(6) == 'Q') spotTo.setPiece(new Queen(whiteTurn));								
+								if (input.charAt(6) == 'B')
+									spotTo.setPiece(new Bishop(whiteTurn));
+								if (input.charAt(6) == 'N')
+									spotTo.setPiece(new Knight(whiteTurn));
+								if (input.charAt(6) == 'R')
+									spotTo.setPiece(new Rook(whiteTurn));
+								if (input.charAt(6) == 'Q')
+									spotTo.setPiece(new Queen(whiteTurn));
 							}
 						}
 
@@ -91,10 +94,14 @@ public class ChessGame {
 								System.out.println("Promoting to queen");
 								spotTo.setPiece(new Queen(whiteTurn));
 							} else if (input.length() == 7) {
-								if (input.charAt(6) == 'B') spotTo.setPiece(new Bishop(whiteTurn));
-								if (input.charAt(6) == 'N') spotTo.setPiece(new Knight(whiteTurn));
-								if (input.charAt(6) == 'R') spotTo.setPiece(new Rook(whiteTurn));
-								if (input.charAt(6) == 'Q') spotTo.setPiece(new Queen(whiteTurn));									
+								if (input.charAt(6) == 'B')
+									spotTo.setPiece(new Bishop(whiteTurn));
+								if (input.charAt(6) == 'N')
+									spotTo.setPiece(new Knight(whiteTurn));
+								if (input.charAt(6) == 'R')
+									spotTo.setPiece(new Rook(whiteTurn));
+								if (input.charAt(6) == 'Q')
+									spotTo.setPiece(new Queen(whiteTurn));
 							}
 						}
 
@@ -106,7 +113,7 @@ public class ChessGame {
 							end();
 						}
 
-						 whiteTurn = !whiteTurn;
+						whiteTurn = !whiteTurn;
 					} catch (IllegalMoveException e) {
 						System.out.println("Illegal move, try again");
 					}

@@ -28,22 +28,26 @@ public class Spot {
 	}
 
 	public Spot clone() {
-		if (this.piece instanceof Rook) return new Spot(row, col, new Rook(this.piece.isWhite()));
-		else if (this.piece instanceof Knight) return new Spot(row, col, new Knight(this.piece.isWhite()));
-		else if (this.piece instanceof Queen) return new Spot(row, col, new Queen(this.piece.isWhite()));
-		else if (this.piece instanceof Bishop) return new Spot(row, col, new Bishop(this.piece.isWhite()));
+		if (this.piece instanceof Rook)
+			return new Spot(row, col, new Rook(this.piece.isWhite()));
+		else if (this.piece instanceof Knight)
+			return new Spot(row, col, new Knight(this.piece.isWhite()));
+		else if (this.piece instanceof Queen)
+			return new Spot(row, col, new Queen(this.piece.isWhite()));
+		else if (this.piece instanceof Bishop)
+			return new Spot(row, col, new Bishop(this.piece.isWhite()));
 		else if (this.piece instanceof Pawn) {
 			Pawn clone = new Pawn(this.piece.isWhite());
 			clone.setEnpassant(((Pawn) this.getPiece()).getEnpassant());
 			clone.setJustdoublemove(((Pawn) this.getPiece()).getJustdoublemove());
 			return new Spot(row, col, clone);
-		}
-		else if  (this.piece instanceof King){
+		} else if (this.piece instanceof King) {
 			King clone = new King(this.piece.isWhite());
 			clone.setCastled(((King) this.piece).getCastled());
 			return new Spot(row, col, clone);
-		} else return new Spot(row, col, null);
-		
+		} else
+			return new Spot(row, col, null);
+
 	}
 
 	public String toString() {

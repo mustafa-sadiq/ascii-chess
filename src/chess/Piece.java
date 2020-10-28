@@ -20,6 +20,6 @@ public abstract class Piece {
 	public void setHasMoved(boolean value) {
 		this.moved = value;
 	}
-	
+
 	public abstract boolean canMove(Board board, Spot from, Spot to);
 }
