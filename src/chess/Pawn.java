@@ -87,17 +87,15 @@ public class Pawn extends Piece {
 				if ((from.getPiece().isWhite() && from.getRow() == 4)
 						|| (!from.getPiece().isWhite() && from.getRow() == 3)) {
 
-					System.out.println("5th rank");
+					// System.out.println("5th rank");
 
 					if (to.getCol() < 8 || to.getCol() > 0) {
-						System.out.println("on right");
 						if (board.getSpot(from.getRow(), to.getCol()).getPiece() != null
 								&& board.getSpot(from.getRow(), to.getCol()).getPiece().isWhite() != from.getPiece()
 										.isWhite()) {
-							System.out.println("enemy pawn on right");
 							if (board.getSpot(from.getRow(), to.getCol()).getPiece() instanceof Pawn
 									&& ((Pawn) board.getSpot(from.getRow(), to.getCol()).getPiece()).justdoublemove) {
-								System.out.println("Enpassant true");
+								// System.out.println("Enpassant true");
 								enpassant = true;
 							}
 						}
@@ -105,7 +103,6 @@ public class Pawn extends Piece {
 
 				}
 
-				System.out.println(enpassant);
 				if (!enpassant)
 					return false;
 
