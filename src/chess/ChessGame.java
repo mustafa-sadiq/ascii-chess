@@ -12,7 +12,7 @@ public class ChessGame {
 	}
 
 	public ChessGame() {
-		whiteTurn = false;
+		whiteTurn = true;
 		gameFinished = false;
 		board = new Board();
 	}
