@@ -89,28 +89,14 @@ public class Pawn extends Piece {
 
 					System.out.println("5th rank");
 
-					if (from.getCol() + 1 < 8) {
-						if (board.getSpot(from.getRow(), to.getCol() + 1).getPiece() != null
-								&& board.getSpot(from.getRow(), to.getCol() + 1).getPiece().isWhite() != from.getPiece()
+					if (to.getCol() < 8 || to.getCol() > 0) {
+						System.out.println("on right");
+						if (board.getSpot(from.getRow(), to.getCol()).getPiece() != null
+								&& board.getSpot(from.getRow(), to.getCol()).getPiece().isWhite() != from.getPiece()
 										.isWhite()) {
 							System.out.println("enemy pawn on right");
-							if (board.getSpot(from.getRow(), to.getCol() + 1).getPiece() instanceof Pawn
-									&& ((Pawn) board.getSpot(from.getRow(), to.getCol() + 1)
-											.getPiece()).justdoublemove) {
-								System.out.println("Enpassant true");
-								enpassant = true;
-							}
-						}
-					}
-
-					if (from.getCol() - 1 > 0) {
-						if (board.getSpot(from.getRow(), to.getCol() - 1).getPiece() != null
-								&& board.getSpot(from.getRow(), to.getCol() + 1).getPiece().isWhite() != from.getPiece()
-										.isWhite()) {
-							System.out.println("enemy pawn on left");
-							if (board.getSpot(from.getRow(), to.getCol() - 1).getPiece() instanceof Pawn
-									&& ((Pawn) board.getSpot(from.getRow(), to.getCol() - 1)
-											.getPiece()).justdoublemove) {
+							if (board.getSpot(from.getRow(), to.getCol()).getPiece() instanceof Pawn
+									&& ((Pawn) board.getSpot(from.getRow(), to.getCol()).getPiece()).justdoublemove) {
 								System.out.println("Enpassant true");
 								enpassant = true;
 							}

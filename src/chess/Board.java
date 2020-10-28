@@ -71,12 +71,11 @@ public class Board {
 //		spots[6][6] = new Spot(6, 6, new Pawn(false));
 //		spots[6][7] = new Spot(6, 7, new Pawn(false));
 
-		spots[1][0] = new Spot(1, 0, new Pawn(true));
-		spots[1][1] = new Spot(1, 1, new Pawn(true));
-		spots[4][0] = new Spot(4, 0, new Pawn(false));
-		((Pawn) spots[4][0].getPiece()).setHasMoved(true);
-		spots[3][1] = new Spot(3, 1, new Pawn(false));
-		((Pawn) spots[3][1].getPiece()).setHasMoved(true);
+//		spots[1][0] = new Spot(1, 0, new Pawn(true));
+//		spots[1][1] = new Spot(1, 1, new Pawn(true));		
+		spots[4][4] = new Spot(4, 4, new Pawn(true));
+		((Pawn) spots[4][4].getPiece()).setHasMoved(true);		
+		spots[6][3] = new Spot(6, 3, new Pawn(false));
 
 //		for debugging 
 		for (int i = 0; i < 8; i++) {
