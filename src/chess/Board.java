@@ -162,10 +162,13 @@ public class Board {
 				for (int z = 0; z < 8; z++) {
 					for (int w = 0; w < 8; w++) {
 						// Spot (z, w)
-						if (getSpot(x, y).getPiece() != null) {
+						if (getSpot(x, y).getPiece() != null && x + y != z + w) {
 							if (getSpot(x, y).getPiece().isWhite() == isWhite) {
 
 								try {
+									// System.out.println("Tring move from: " + x + " " + y + " " + getSpot(x,
+									// y).getPiece() + " to: " + z + " " + w + " " + getSpot(z, w).getPiece());
+
 									tryMove(getSpot(x, y), getSpot(z, w), isWhite, false);
 
 									// System.out.println(getSpot(x,y));
@@ -239,6 +242,27 @@ public class Board {
 					getSpot(from.getRow(), to.getCol()).setPiece(null);
 				}
 
+				if (from.getPiece() instanceof King && ((King) from.getPiece()).getCastled()) {
+					if (to.getCol() - from.getCol() == 2) {
+						if (to.getRow() == 0) {
+							getSpot(0, 5).setPiece(getSpot(0,7).getPiece());
+							getSpot(0, 7).setPiece(null);
+						} else if (to.getRow() == 7) {
+							getSpot(7, 5).setPiece(getSpot(7,7).getPiece());
+							getSpot(7, 7).setPiece(null);
+						}
+
+					} else if (from.getCol() - to.getCol() == 2) {
+						if (to.getRow() == 0) {
+							getSpot(0, 3).setPiece(getSpot(0,3).getPiece());
+							getSpot(0, 0).setPiece(null);
+						} else if (to.getRow() == 7) {
+							getSpot(7, 3).setPiece(getSpot(7,3).getPiece());
+							getSpot(7, 0).setPiece(null);
+						}
+					}
+				}
+
 				makeMove(from, to);
 			}
 
@@ -261,7 +285,7 @@ public class Board {
 		else
 
 		{
-			throw new IllegalMoveException("Illegal move, try again ");
+			throw new IllegalMoveException("Illegal move, try again");
 		}
 
 	}
@@ -269,6 +293,10 @@ public class Board {
 	public void makeMove(Spot from, Spot to) {
 		if (from.getPiece() instanceof Pawn && Math.abs(to.getRow() - from.getRow()) == 2) {
 			((Pawn) from.getPiece()).setJustdoublemove(true);
+		}
+
+		if (from.getPiece() instanceof King) {
+			((King) from.getPiece()).setCastled(false);
 		}
 
 		for (int i = 0; i < 8; i++) {
