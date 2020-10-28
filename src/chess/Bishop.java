@@ -11,7 +11,7 @@ public class Bishop extends Piece {
 
 	/**
 	 * Constructor for Bishop (black or white)
-	 * @param white
+	 * @param white is white or not
 	 */
 	public Bishop(boolean white) {
 		super(white);

@@ -19,7 +19,7 @@ public abstract class Piece {
 	/**
 	 * Creates a new Piece (white or black)
 	 * 
-	 * @param white
+	 * @param white is white or not
 	 */
 	public Piece(boolean white) {
 		this.white = white;
@@ -43,7 +43,7 @@ public abstract class Piece {
 	/**
 	 * Setter for moved
 	 * 
-	 * @param boolean moved yet or not
+	 * @param value moved yet or not
 	 */
 	public void setHasMoved(boolean value) {
 		this.moved = value;
@@ -51,9 +51,9 @@ public abstract class Piece {
 
 	/**
 	 * Can the piece move on the given board from spot from to spot to
-	 * @param board
-	 * @param Spot  from
-	 * @param Spot  to
+	 * @param board board on which trying move
+	 * @param from spot from
+	 * @param to spot to
 	 * @return boolean yes or no
 	 */
 	public abstract boolean canMove(Board board, Spot from, Spot to);

@@ -11,7 +11,7 @@ public class Queen extends Piece {
 
 	/**
 	 * Constructor for Queen (black or white)
-	 * @param isWhite
+	 * @param white isWhite?
 	 */
 	public Queen(boolean white) {
 		super(white);

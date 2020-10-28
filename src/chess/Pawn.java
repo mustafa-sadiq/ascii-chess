@@ -28,7 +28,7 @@ public class Pawn extends Piece {
 
 	/**
 	 * setter for justdoublemove
-	 * @param boolean justdoublemove
+	 * @param justdoublemove boolean justdoublemove
 	 */
 	public void setJustdoublemove(boolean justdoublemove) {
 		this.justdoublemove = justdoublemove;
@@ -44,7 +44,7 @@ public class Pawn extends Piece {
 
 	/**
 	 * setter for enpassant
-	 * @param boolean enpassant
+	 * @param value boolean enpassant
 	 */
 	public void setEnpassant(boolean value) {
 		enpassant = value;
@@ -52,7 +52,7 @@ public class Pawn extends Piece {
 
 	/**
 	 * Constructor for Pawn creating a white or black pawn
-	 * @param white
+	 * @param white white or black
 	 */
 	public Pawn(boolean white) {
 		super(white);

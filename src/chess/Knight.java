@@ -11,7 +11,7 @@ public class Knight extends Piece {
 
 	/**
 	 * Constructor for Knight (black or white)
-	 * @param white
+	 * @param white white or black
 	 */
 	public Knight(boolean white) {
 		super(white);

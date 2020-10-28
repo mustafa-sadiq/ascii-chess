@@ -23,7 +23,7 @@ public class IllegalMoveException extends RuntimeException {
 	/**
 	 * A constructor which can display messages to debug
 	 * 
-	 * @param String to print
+	 * @param value String to print
 	 */
 	public IllegalMoveException(String value) {
 		// TODO Auto-generated constructor stub

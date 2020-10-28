@@ -22,9 +22,11 @@ public class Board {
 	}
 
 	/**
-	 * @param row
-	 * @param col
-	 * @return Spot at row col
+	 * get spot 
+	 * 
+	 * @param row Row
+	 * @param col Column
+	 * @return Spot return spot at row column
 	 */
 	public Spot getSpot(int row, int col) {
 		return spots[row][col];
@@ -32,7 +34,7 @@ public class Board {
 
 	/**
 	 * Constructor for Board creating a Board from given spot array
-	 * @param Spot array from another board
+	 * @param value Spot array from another board
 	 */
 	public Board(Spot[][] value) {
 		this.spots = value;
@@ -41,9 +43,9 @@ public class Board {
 	/**
 	 * setter for Spot at row col
 	 * 
-	 * @param row
-	 * @param col
-	 * @param spot
+	 * @param row Row
+	 * @param col Column
+	 * @param spot Spot
 	 */
 	private void setSpot(int row, int col, Spot spot) {
 		spots[row][col] = spot;
@@ -127,7 +129,7 @@ public class Board {
 
 	/**
 	 * Print the board
-	 * @param boolean to if print lines before and after
+	 * @param lines boolean to if print lines before and after
 	 */
 	public void printBoard(boolean lines) {
 
@@ -166,8 +168,8 @@ public class Board {
 
 	/**
 	 * getter for King spot
-	 * @param white or black boolean
-	 * @return Spot of King (white or black)
+	 * @param isWhite white or black boolean
+	 * @return Spot spot of King (white or black)
 	 */
 	public Spot getKingSpot(boolean isWhite) {
 		for (int row = 0; row < 8; row++) {
@@ -182,7 +184,7 @@ public class Board {
 
 	/**
 	 * is white or black in check
-	 * @param white or black boolean
+	 * @param isWhite white or black boolean
 	 * @return boolean yes or no
 	 */
 	public boolean isInCheck(boolean isWhite) {
@@ -204,7 +206,7 @@ public class Board {
 
 	/**
 	 * are any moves possible for given color
-	 * @param white or black boolean
+	 * @param isWhite white or black boolean
 	 * @return boolean yes or no
 	 */
 	public boolean isMovePossible(Boolean isWhite) {
@@ -243,10 +245,10 @@ public class Board {
 
 	/**
 	 * try moving spotFrom to spotTo and only make move if makeMove is true
-	 * @param Spot from
-	 * @param Spot to
-	 * @param is whiteTurn?
-	 * @param makeMove?
+	 * @param from Spot from
+	 * @param to Spot to
+	 * @param whiteTurn whiteTurn?
+	 * @param makeMove makeMove?
 	 */
 	public void tryMove(Spot from, Spot to, boolean whiteTurn, boolean makeMove) {
 
@@ -353,8 +355,8 @@ public class Board {
 
 	/**
 	 * Makes the move and resets Pawn and King
-	 * @param move from spot
-	 * @param move to spot
+	 * @param from move from spot
+	 * @param to move to spot
 	 */
 	public void makeMove(Spot from, Spot to) {
 		if (from.getPiece() instanceof Pawn && Math.abs(to.getRow() - from.getRow()) == 2) {

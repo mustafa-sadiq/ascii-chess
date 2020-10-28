@@ -12,7 +12,7 @@ public class Rook extends Piece {
 
 	/**
 	 * Constructor for Rook (black or white)
-	 * @param white
+	 * @param white isWhite?
 	 */
 	public Rook(boolean white) {
 		super(white);

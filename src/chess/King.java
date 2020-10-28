@@ -25,7 +25,7 @@ public class King extends Piece {
 
 	/**
 	 * setter for castled
-	 * @param castled
+	 * @param value castled
 	 */
 	public void setCastled(boolean value) {
 		castled = value;
@@ -33,7 +33,7 @@ public class King extends Piece {
 
 	/**
 	 * Constructor for King (black or white) 
-	 * @param isWhite
+	 * @param white isWhite
 	 */
 	public King(boolean white) {
 		super(white);

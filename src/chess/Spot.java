@@ -24,9 +24,9 @@ public class Spot {
 	/**
 	 * Constructor creating a Spot with row, column and piece
 	 * 
-	 * @param row
-	 * @param col
-	 * @param piece
+	 * @param row Row
+	 * @param col Column
+	 * @param piece Piece
 	 */
 	public Spot(int row, int col, Piece piece) {
 		this.piece = piece;
@@ -44,7 +44,7 @@ public class Spot {
 
 	/**
 	 * setter for Piece
-	 * @param piece
+	 * @param piece Piece to set
 	 */
 	public void setPiece(Piece piece) {
 		this.piece = piece;

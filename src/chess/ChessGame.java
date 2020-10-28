@@ -165,7 +165,7 @@ public class ChessGame {
 	/**
 	 * A method which reads input and returns spots
 	 * 
-	 * @param Input from Scanner
+	 * @param input Input from Scanner
 	 * @return Two spots (from and to)
 	 */
 	public Spot[] readSpots(String input) {
